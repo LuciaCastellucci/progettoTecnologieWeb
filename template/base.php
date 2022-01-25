@@ -23,7 +23,6 @@
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="index.html" class="nav-link px-2 link-secondary">Home</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">Prodotti</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">Fornitori</a></li>
           </ul>
   
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -55,13 +54,28 @@
             </svg>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="login.html">Login</a></li>
-              <li><a class="dropdown-item" href="registrazione.html">Registrati</a></li>
+              <li><a class="dropdown-item" href=
+              <?php if(isUserLoggedIn()) {
+                echo "login.php";
+              }?>
+              >
+              <?php if(isUserLoggedIn()) {
+                echo "Login";
+              }?>
+              </a></li>
+              <li><a class="dropdown-item" href=<?php if(isUserLoggedIn()) {
+                echo "registrazione.php";
+              }?>>
+              <?php if(isUserLoggedIn()) {
+                echo "Registrati";
+              }?>
+              </a></li>
             </ul>
           </div>
         </div>
       </div>
     </header>
+
     <main>
       <?php
       if(isset($templateParams["nome"])){
@@ -69,6 +83,7 @@
       }
       ?>
     </main>
+
     <footer class="footer py-2 text-muted text-center text-small">
       <p class="mb-1">2017–2022 Jordan Lovers</p>
       <img src=".\resources\images\logo.png" alt="logo">
