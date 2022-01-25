@@ -14,7 +14,9 @@
   </head>
 
   <body>
-
+   <!-- Bootstrap -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
     <header class="p-3 mb-3 border-bottom">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start fixed-top bg-white">
@@ -55,20 +57,36 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href=
-              <?php if(isUserLoggedIn()) {
+              <?php if(!isUserLoggedIn()) {
                 echo "login.php";
-              }?>
+              } 
+              else {
+                echo "areaRiservata.php";
+              }
+              ?>
               >
-              <?php if(isUserLoggedIn()) {
+              <?php if(!isUserLoggedIn()) {
                 echo "Login";
+              } 
+              else {
+                echo "Area riservata";
               }?>
               </a></li>
-              <li><a class="dropdown-item" href=<?php if(isUserLoggedIn()) {
+              <li><a class="dropdown-item" href=
+              <?php if(!isUserLoggedIn()) {
                 echo "registrazione.php";
-              }?>>
-              <?php if(isUserLoggedIn()) {
+              }
+              else {
+                echo "logout.php";
+              }
+              ?>>
+              <?php if(!isUserLoggedIn()) {
                 echo "Registrati";
-              }?>
+              }
+              else {
+                echo "Esci";
+              }
+              ?>
               </a></li>
             </ul>
           </div>
