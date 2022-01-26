@@ -3,7 +3,6 @@ require_once 'bootstrap.php';
 
 if(isset($_POST["username"]) && isset($_POST["password"])){
     $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
-    echo "login result";
     if(count($login_result)==0){
         //Login fallito
         $templateParams["errorelogin"] = "Errore! Controllare username o password!";
@@ -13,15 +12,17 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
     }
 }
 
-if(isUserLoggedIn()){
-    $templateParams["titolo"] = "Area utente";
-    $templateParams["nome"] = "template/areaUtente.php";
-    $templateParams["css"] = "css/areaUtente.css";
+if(!isUserLoggedIn()){
+    $templateParams["titolo"] = "Registrazione";
+    $templateParams["nome"] = "template/registrazione.php";
+    $templateParams["css"] = "css/registrazione.css";
 }
 else{
-    $templateParams["titolo"] = "Login";
-    $templateParams["nome"] = "template/login-form.php";
-    $templateParams["css"] = "css/login.css";
+    logout();
+    $templateParams["titolo"] = "Home";
+    $templateParams["nome"] = "homepage.php";
+    $templateParams["css"] = "css/homepage.css";
+    require 'template/base_header.php';
 }
 
 require 'template/base_footer.php';

@@ -19,17 +19,20 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkUserPw($user, $pw){
-        $stmt = $this->db->prepare("SELECT username, pw FROM utente WHERE username=$user AND pw=$pw");
+    public function checkLogin($user, $pw){
+        $stmt = $this->db->prepare("SELECT username, pw, nome FROM utente WHERE utente.username = ? AND utente.pw = ?");
+        $stmt->bind_param('ss',$user, $pw);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkType($user, $pw, $type){
-        $stmt = $this->db->prepare("SELECT username, pw FROM utente WHERE username=$user AND pw=$pw AND tipo=$type");
+    public function isAdmin($user, $pw){
+        $stmt = $this->db->prepare("SELECT username, pw, nome FROM utente WHERE username = ? AND pw = ? AND tipo = 'admin");
+        $stmt->bind_param('ss',$username, $pw);
         $stmt->execute();
+
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);

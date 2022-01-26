@@ -1,4 +1,6 @@
-form{
-    background-image: url("resources/images/bg_login.jpg");
-    opacity: 0.5;
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+body{
+    background-image: url("../resources/images/bg_login.jpg");
 }

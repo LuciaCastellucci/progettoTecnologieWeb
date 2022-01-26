@@ -14,4 +14,10 @@ function registerLoggedUser($user){
     $_SESSION["nome"] = $user["nome"];
 }
 
+function logout(){
+    unset($_SESSION["username"]);
+    unset($_SESSION["name"]);
+    session_write_close();
+}
+
 ?>

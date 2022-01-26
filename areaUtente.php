@@ -13,16 +13,18 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
     }
 }
 
-if(isUserLoggedIn()){
-    $templateParams["titolo"] = "Area utente";
-    $templateParams["nome"] = "template/areaUtente.php";
+if(isAdmin()){
+    $templateParams["titolo"] = "Area riservata cliente";
+    $templateParams["nome"] = "template/areaCliente.php";
     $templateParams["css"] = "css/areaUtente.css";
+    echo "area riservata cliente";
 }
 else{
-    $templateParams["titolo"] = "Login";
-    $templateParams["nome"] = "template/login-form.php";
-    $templateParams["css"] = "css/login.css";
+    $templateParams["titolo"] = "Admin";
+    $templateParams["nome"] = "template/areaAdmin.php";
+    $templateParams["css"] = "css/areaUtente.css";
+    echo "area riservata admin";
 }
 
-require 'template/base_footer.php';
+require 'template/base.php';
 ?>
