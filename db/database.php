@@ -28,9 +28,9 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function isAdmin($user, $pw){
-        $stmt = $this->db->prepare("SELECT username, pw, nome FROM utente WHERE username = ? AND pw = ? AND tipo = 'admin");
-        $stmt->bind_param('ss',$username, $pw);
+    public function isAdmin($user){
+        $stmt = $this->db->prepare("SELECT username, pw, nome FROM utente WHERE username = ? AND tipo = 'admin'");
+        $stmt->bind_param('s',$username);
         $stmt->execute();
 
         $result = $stmt->get_result();

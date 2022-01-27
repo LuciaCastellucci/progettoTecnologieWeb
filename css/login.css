@@ -1,6 +1,25 @@
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-body{
     background-image: url("../resources/images/bg_login.jpg");
 }
+div.container {
+    margin: top 300px;
+    max-width: 600px;
+    max-height: 500px;
+    padding: 2px;
+    
+    color: white;
+  }
+  div.col-md-10 {
+    float: center;
+  }
+  input.w-100:hover, input.w-100:active, input.w-100:link, input.w-100:focus {
+    background-color: white;
+    color: #65499c;
+    border-color: #65499c;
+  }
+  input.w-100 {
+    background-color: #65499c;
+    color: white;
+    border-color: white;
+  }
