@@ -10,6 +10,14 @@ class DatabaseHelper{
         }
     }
 
+    public function countProducts(){
+        $stmt = $this->db->prepare("SELECT * FROM modello");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return count($result->fetch_all(MYSQLI_ASSOC));
+    }
+
     public function getRandomProducts($n){
         $stmt = $this->db->prepare("SELECT immagine, descrizione FROM modello, scarpe WHERE codiceModello=codModello ORDER BY RAND() LIMIT ?");
         $stmt->bind_param("i", $n);

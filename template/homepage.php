@@ -1,4 +1,4 @@
-  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div id="carouselExampleCaptions" class="carousel slide mx-auto position-relative" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -38,7 +38,7 @@
   </div>
   <div class="row row-cols-1 row-cols-md-2 g-2">
     <div class="col">
-      <div class="card h-100">
+      <div class="card mx-auto h-100">
         <img src=".\resources\images\jordan.jpg" class="card-img-top" alt="jordan">
         <div class="card-body">
           <h5 class="card-title">Jordan</h5>
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="card h-100">
+      <div class="card mx-auto h-100">
         <img src=".\resources\images\dunk.jpg" class="card-img-top" alt="dunk">
         <div class="card-body">
           <h5 class="card-title">Dunk</h5>

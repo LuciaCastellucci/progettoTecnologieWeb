@@ -1,16 +1,18 @@
-<header class="p-3 mb-3 border-bottom">
+<header class="p-3 mx-auto border-bottom">
       <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start fixed-top bg-white">
-  
-          <a class="navbar-brand" href="index.php"><img src=".\resources\images\logo.png" alt="logo"></a>
-          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="index.php" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="prodotti.php" class="nav-link px-2 link-dark">Prodotti</a></li>
-          </ul>
-  
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start fixed-top bg-white position-relative">
+
+            <a class="navbar-brand" href="index.php"><img src=".\resources\images\logo.png" alt="logo"></a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="index.php" class="nav-link px-2 link-secondary">Home</a></li>
+              <li><a href="shop.php" class="nav-link px-2 link-dark">Prodotti</a></li>
+            </ul>
+
+          <!--
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
             <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
           </form>
+          -->
           
           <button type="button" class="btn btn-primary position-relative">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
