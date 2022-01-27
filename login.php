@@ -39,5 +39,5 @@ else{
     $templateParams["css"] = "css/login.css";
 }
 
-require 'template/base.php';
+require 'template/base_header.php';
 ?>
