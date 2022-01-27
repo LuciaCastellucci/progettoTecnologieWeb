@@ -10,6 +10,15 @@ class DatabaseHelper{
         }
     }
 
+    public function filterProdByType($type) {
+        $stmt = $this->db->prepare("SELECT immagine, descrizione, tipo, altezza FROM modello WHERE codTipo = ? ORDER BY RAND() LIMIT ?");
+        $stmt->bind_param("s", $type);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function countProducts(){
         $stmt = $this->db->prepare("SELECT * FROM modello");
         $stmt->execute();
@@ -18,8 +27,16 @@ class DatabaseHelper{
         return count($result->fetch_all(MYSQLI_ASSOC));
     }
 
+    public function getProducts(){
+        $stmt = $this->db->prepare("SELECT * FROM modello");
+        $stmt->execute(); 
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getRandomProducts($n){
-        $stmt = $this->db->prepare("SELECT immagine, descrizione FROM modello, scarpe WHERE codiceModello=codModello ORDER BY RAND() LIMIT ?");
+        $stmt = $this->db->prepare("SELECT immagine, modello, tipo, descrizione FROM modello, scarpa WHERE codiceModello=codModello ORDER BY RAND() LIMIT ?");
         $stmt->bind_param("i", $n);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -45,8 +62,5 @@ class DatabaseHelper{
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
-
 }
-
 ?>

@@ -1,0 +1,22 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+div.flex-shrink-0 {
+    width: 100%;
+}
+a.btn, button.btn {
+    margin: 2px;
+    background-color: #65499c;
+    color: white;
+    border-color: white;
+}
+button.btn:hover, div+button.btn:active, button.btn:link, button.btn:focus {
+    background-color: #c7a4ff;
+    color: black;
+    border-color: black;
+}
+a.btn:hover, a.btn:active, a.btn:link, a.btn:focus {
+    background-color: white;
+    color: #65499c;
+    border-color: #65499c;
+}
