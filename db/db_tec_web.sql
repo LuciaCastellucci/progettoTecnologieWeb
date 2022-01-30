@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 29, 2022 alle 20:01
+-- Creato il: Gen 30, 2022 alle 23:48
 -- Versione del server: 10.4.22-MariaDB
 -- Versione PHP: 8.1.2
 
@@ -42,8 +42,24 @@ CREATE TABLE `carrello` (
 CREATE TABLE `modello` (
   `codiceModello` int(8) NOT NULL,
   `tipo` varchar(100) NOT NULL,
-  `altezza` varchar(100) NOT NULL
+  `altezza` varchar(100) NOT NULL,
+  `descrizione` varchar(100) NOT NULL,
+  `immagine` varchar(100) NOT NULL,
+  `prezzo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `modello`
+--
+
+INSERT INTO `modello` (`codiceModello`, `tipo`, `altezza`, `descrizione`, `immagine`, `prezzo`) VALUES
+(1, 'Dunk', 'Low', 'Black White', 'dunk_low_black_white.jpg', 150),
+(2, 'Dunk', 'High', 'Aluminium', 'dunk_high_aluminium.jpg', 350),
+(3, 'Jordan', 'Low', 'Goldenrod', 'dunk_low_goldenrod.jpg', 200),
+(4, 'Dunk', 'High', 'University Red', 'dunk_high_university_red.jpg', 300),
+(5, 'Dunk', 'Low', 'Archeo Pink', 'dunk_low_archeo_pink.jpg', 280),
+(6, 'Jordan', 'Mid', 'SE Purple', 'jordan_mid_SE_purple.jpg', 260),
+(7, 'Jordan', 'Low', 'Starfish', 'jordan_low_starfish.jpg', 180);
 
 -- --------------------------------------------------------
 
@@ -258,12 +274,6 @@ ALTER TABLE `carrello`
   ADD CONSTRAINT `carrello_cliente` FOREIGN KEY (`userCliente`) REFERENCES `utente` (`username`),
   ADD CONSTRAINT `carrello_modello` FOREIGN KEY (`codModello`) REFERENCES `scarpa` (`codModello`),
   ADD CONSTRAINT `carrello_taglia` FOREIGN KEY (`codTaglia`) REFERENCES `scarpa` (`codTaglia`);
-
---
--- Limiti per la tabella `modello`
---
-ALTER TABLE `modello`
-  ADD CONSTRAINT `modello_ibfk_1` FOREIGN KEY (`codiceModello`) REFERENCES `carrello` (`codModello`);
 
 --
 -- Limiti per la tabella `notifiche`
