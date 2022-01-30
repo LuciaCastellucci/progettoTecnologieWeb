@@ -7,10 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--  -->
     <link href="areaUtente.css" rel="stylesheet" type="text/css"/>
+
+      <!--<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
   </head>
 
   <body>
@@ -49,17 +56,18 @@
           Prodotti
         </a>
       </li>
-      <li>
-        <a href="account.php" class="nav-link link-dark"> <!-- account.php da creare per presentare i dati dell'utente-->
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle link-dark"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <!-- account.php da creare per presentare i dati dell'utente-->
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           Account
         </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Dati personali</a>
+          <a class="dropdown-item bg-red" href="#">Esci</a>
+        </div>
       </li>
-
     </ul>
     <hr>
-  </div>
-
 </main>
 </body>
 </html>
