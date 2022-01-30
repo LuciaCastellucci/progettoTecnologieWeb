@@ -10,6 +10,7 @@
 
     <!--  -->
     <title><?php echo $templateParams["titolo"]; ?></title>
+    <link href=<?php echo $templateParams["css"]; ?> rel="stylesheet" type="text/css"/>
     <link href="./css/base.css" rel="stylesheet" type="text/css"/>
   </head>
 
