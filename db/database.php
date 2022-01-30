@@ -45,7 +45,7 @@ class DatabaseHelper{
     }
 
     public function checkLogin($user, $pw){
-        $stmt = $this->db->prepare("SELECT username, pw, nome FROM utente WHERE utente.username = ? AND utente.pw = ?");
+        $stmt = $this->db->prepare("SELECT username, pw, nome FROM utente WHERE username = ? AND pw = ?");
         $stmt->bind_param('ss',$user, $pw);
         $stmt->execute();
         $result = $stmt->get_result();

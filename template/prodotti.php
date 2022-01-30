@@ -31,33 +31,35 @@
     </ul>
   </div>
 
-<div class="card-group">
-  <?php foreach($templateParams["modelli"] as $modello): ?>
-    <div class="card">
-      <a href="prodotto.php?id=<?php echo $modello["codiceModello"]; ?>">
-      <img src="<?php echo UPLOAD_DIR.$articolo["imgarticolo"]; ?>"/>
-      </a>
-        <div class="card-body">
-          <h5 class="card-title"><?php echo "Nike ".$modello["codTipo"]." ".$modello["codAltezza"]." ".$modello["descrizione"];?></h5>
+<div class="card-group mx-auto">
+        <?php foreach($templateParams["modelli"] as $modello):?>
+          <div class="card mx-auto w-100">
+            <a href="prodotto.php?id=<?php echo $modello["codiceModello"]; ?>">
+            <img src="<?php echo UPLOAD_DIR.$modello["immagine"]; ?>" class="card-img-top"/>
+            </a>
+              <div class="card-body">
+                <h5 class="card-title"><?php echo "Nike ".$modello["tipo"]." ".$modello["altezza"]." ".$modello["descrizione"];?></h5>
+                <h6 class="card-subtitle"><?php echo $modello["prezzo"]." €";?></h6>
+              </div>
+          <a class="btn btn-primary" href="prodotto.php?id=<?php echo $modello["codiceModello"]; ?>">Acquista</a>
         </div>
-    <a href="prodotto.php?id=<?php echo $modello["codiceModello"]; ?>" class="btn btn-primary">Acquista</a>
-  </div>
-  <?php endforeach; ?>
+        <?php endforeach; ?> 
 </div>
 
+<!--
+<div class="container">
+    <div class="row row-cols-4">
+        <div class="col-4">
+
+        </div>
+    </div>
+  </div>
+-->
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group me-2" role="group" aria-label="First group">
     <button type="button" class="btn btn-primary">1</button>
     <button type="button" class="btn btn-primary">2</button>
     <button type="button" class="btn btn-primary">3</button>
     <button type="button" class="btn btn-primary">4</button>
-  </div>
-  <div class="btn-group me-2" role="group" aria-label="Second group">
-    <button type="button" class="btn btn-secondary">5</button>
-    <button type="button" class="btn btn-secondary">6</button>
-    <button type="button" class="btn btn-secondary">7</button>
-  </div>
-  <div class="btn-group" role="group" aria-label="Third group">
-    <button type="button" class="btn btn-info">8</button>
   </div>
 </div>
