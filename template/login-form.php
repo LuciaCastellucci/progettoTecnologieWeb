@@ -5,7 +5,7 @@
       <p class="lead">Inserisci le tue credenziali per accedere all'area riservata.</p>
     </div>
 
-    <form action="login.php" method="POST">
+    <form action="./template/areaCliente.php" method="POST">
         <?php if(isset($templateParams["errorelogin"])): ?>
         <p><?php echo $templateParams["errorelogin"]; ?></p>
         <?php endif; ?>
