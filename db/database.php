@@ -54,8 +54,8 @@ class DatabaseHelper{
     }
 
     public function isAdmin($user){
-        $stmt = $this->db->prepare("SELECT username, pw, nome FROM utente WHERE username = ? AND tipo = 'admin'");
-        $stmt->bind_param('s',$username);
+        $stmt = $this->db->prepare("SELECT * FROM utente WHERE username = ? AND tipo = 'admin'");
+        $stmt->bind_param('s',$user);
         $stmt->execute();
 
         $result = $stmt->get_result();
