@@ -1,26 +1,8 @@
- 
-  <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!--  -->
-    <link href="areaUtente.css" rel="stylesheet" type="text/css"/>
-
-      <!--<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-  </head>
-
-  <body>
+ 
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 
@@ -45,13 +27,13 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="base.php" class="nav-link link-dark">
+        <a href="index.php" class="nav-link link-dark">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
       </li>
       <li>
-        <a href="prodotti.php" class="nav-link link-dark ">
+        <a href="shop.php" class="nav-link link-dark ">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Prodotti
         </a>
@@ -63,14 +45,13 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Dati personali</a>
-          <a class="dropdown-item bg-red" href="#">Esci</a>
+          <a class="dropdown-item bg-red" href="logout.php">Esci</a>
         </div>
       </li>
     </ul>
     <hr>
 </main>
-</body>
-</html>
+
 
   <!--<svg xmlns="http://www.w3.org/2000/svg">
   <symbol id="home" viewBox="0 0 16 16">
