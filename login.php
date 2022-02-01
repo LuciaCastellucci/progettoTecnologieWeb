@@ -10,6 +10,8 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
     else{
         registerLoggedUser($login_result[0]);
         if (!isCartSetted()) {
+            echo "non settato, session carrello:";
+            echo $_SESSION["carrello"];
             $result = $dbh->getUserCart($_POST["username"]);
             if (count($result)!=0) {
                 registerCart($result[0]);
@@ -20,8 +22,9 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
                     $idCarrello = 1;
                 }
                 else {
-                    $res = $dbh->lastCartCode() + 1;
-                    $idCarrello = $res[0];
+                    $res = $dbh->lastCartCode();
+                    $idCarrello = implode(",",$res[0]);
+                    $idCarrello = $idCarrello + 1;
                 }
                 $result_cart = $dbh->createCart($idCarrello, $_POST["username"]);
                 if($result_cart!=false){
@@ -31,6 +34,16 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
                 else{
                     $msg = "Errore in inserimento!";
                 }
+            }
+        }
+        else {
+            echo "settato";
+            $result_update = $dbh->updateCart($_SESSION["carrello"], $_POST["username"]);
+            if($result_update!=false){
+                $msg = "Inserimento completato correttamente!";
+            }
+            else{
+                $msg = "Errore in inserimento!";
             }
         }
     }

@@ -23,6 +23,6 @@ div.container {
     color: white;
     border-color: white;
   }
-  p {
+  form+p {
     color: red;
   }

@@ -27,11 +27,18 @@ div.card-body {
     text-align: center;
 }
 select.form-select {
-    margin-left: 10%;
-    width: 30%;
+    margin-left: 8%;
+    width: 15%;
     min-width: 40%;
     position: relative;
     float: left;
+}
+form label {
+    margin-left: 10%;
+    position: relative;
+    float: left;
+    text-align: left;
+    width: 100%;
 }
 input.btn:hover, input.btn:active, input.btn:link, input.btn:focus {
     background-color: white;
@@ -39,7 +46,7 @@ input.btn:hover, input.btn:active, input.btn:link, input.btn:focus {
     border-color: #65499c;
 }
 form input.btn {
-    margin-right: 10%;
+    margin-right: 8%;
     position: relative;
     float: right;
     width: 40%;

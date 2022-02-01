@@ -1,7 +1,6 @@
 <?php
 require_once 'bootstrap.php';
 
-echo $_GET["taglia"];
 $id_modello = $_SESSION["codiceModello"];
 unsetVar("codiceModello");
 if($_GET["taglia"]!=""){
@@ -21,6 +20,7 @@ if($_GET["taglia"]!=""){
         $result_cart = $dbh->createCart($idCarrello, NULL);
         if($result_cart!=false){
             $msg = "Inserimento completato correttamente!";
+            echo "carrello creato";
             registerCart($idCarrello);
         }
         else{

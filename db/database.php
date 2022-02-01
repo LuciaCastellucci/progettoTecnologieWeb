@@ -123,5 +123,14 @@ class DatabaseHelper{
         
         return $stmt->insert_id;
     }
+
+    public function updateCart($idUtente, $idCarrello){
+        $query = "UPDATE carrello SET userCliente = ? WHERE codiceCarrello = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $idUtente, $idCarrello);
+        
+        return $stmt->execute();
+    }
+
 }
 ?>

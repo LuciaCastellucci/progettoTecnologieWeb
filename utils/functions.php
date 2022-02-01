@@ -17,6 +17,7 @@ function registerLoggedUser($user){
 function logout(){
     unset($_SESSION["username"]);
     unset($_SESSION["name"]);
+    unset($_SESSION["carrello"]);
     session_write_close();
 }
 
