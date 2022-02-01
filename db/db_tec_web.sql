@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 30, 2022 alle 23:48
+-- Creato il: Feb 01, 2022 alle 13:12
 -- Versione del server: 10.4.22-MariaDB
 -- Versione PHP: 8.1.2
 
@@ -97,6 +97,26 @@ CREATE TABLE `scarpa` (
   `codTaglia` int(8) NOT NULL,
   `qtaMagazzino` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `scarpa`
+--
+
+INSERT INTO `scarpa` (`codModello`, `codTaglia`, `qtaMagazzino`) VALUES
+(1, 35, 5),
+(1, 36, 3),
+(1, 37, 4),
+(2, 38, 10),
+(3, 37, 3),
+(4, 40, 2),
+(4, 41, 5),
+(4, 42, 2),
+(4, 43, 10),
+(5, 35, 10),
+(5, 38, 3),
+(5, 39, 6),
+(6, 36, 8),
+(6, 37, 3);
 
 -- --------------------------------------------------------
 

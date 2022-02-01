@@ -62,5 +62,23 @@ class DatabaseHelper{
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function productById($id){
+        $stmt = $this->db->prepare("SELECT * FROM modello WHERE codiceModello = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getSizesById($id){
+        $stmt = $this->db->prepare("SELECT codTaglia FROM scarpa WHERE codModello = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>
