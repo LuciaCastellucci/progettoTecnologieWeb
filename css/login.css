@@ -23,3 +23,6 @@ div.container {
     color: white;
     border-color: white;
   }
+  p {
+    color: red;
+  }

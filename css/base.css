@@ -28,9 +28,10 @@ a.btn:hover, a.btn:active, a.btn:link, a.btn:focus {
 button {
     margin-left: 10px;
 }
-footer.footer {
+footer {
     margin-top: 40px;
     background-color: black;
+    max-height: 5%;
 }
 footer.footer a {
     color: #c7a4ff;
@@ -38,4 +39,7 @@ footer.footer a {
 }
 footer p {
     color: #c7a4ff;
+}
+footer+img {
+    max-height: 1%;
 }

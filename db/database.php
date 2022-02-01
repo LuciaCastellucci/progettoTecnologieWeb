@@ -80,5 +80,48 @@ class DatabaseHelper{
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getCarts(){
+        $stmt = $this->db->prepare("SELECT * FROM carrello");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getUserCart($user){
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, carrello WHERE codiceCarrello=codCarrello AND userCliente=?");
+        $stmt->bind_param('s',$user);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function lastCartCode(){
+        $stmt = $this->db->prepare("SELECT MAX(codiceCarrello) FROM carrello");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function createCart($idCarrello, $idCliente){
+        $query = "INSERT INTO carrello (codiceCarrello, userCliente) VALUES (?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("is", $idCarrello, $idCliente);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
+
+    public function insertShoesInCart($idCarrello, $idModello, $idTaglia){
+        $query = "INSERT INTO scarpe_carrello (codCarrello, codModello, codTaglia) VALUES (?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iii", $idCarrello, $idModello, $idTaglia);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
 }
 ?>

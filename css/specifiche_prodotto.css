@@ -48,5 +48,9 @@ form input.btn {
     border-color: white;
 }
 form {
-    margin-bottom: 20%;
+    margin-bottom: 6%;
+}
+p {
+    text-align: center;
+    color: red;
 }

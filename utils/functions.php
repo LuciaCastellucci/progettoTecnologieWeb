@@ -20,4 +20,16 @@ function logout(){
     session_write_close();
 }
 
+function unsetVar($var){
+    unset($_SESSION[$var]);
+}
+
+function isCartSetted(){
+    return !empty($_SESSION['carrello']);
+}
+
+function registerCart($idCart){
+    $_SESSION["carrello"] = $idCart["codiceCarrello"];
+}
+
 ?>
