@@ -8,13 +8,13 @@ if (count($result_product)!=0 && count($result_size)!=0) {
     $_SESSION["codiceModello"] = $result_product[0]["codiceModello"];
     $templateParams["taglie"] = $dbh->getSizesById($_GET["id"]);
     $templateParams["titolo"] = "Prodotto";
-    $templateParams["nome"] = "template/specifiche_prodotto.php";
-    $templateParams["css"] = "css/specifiche_prodotto.css";
+    $templateParams["nome"] = "template/specifiche-prodotto.php";
+    $templateParams["css"] = "css/specifiche-prodotto.css";
 }
 else {
     $templateParams["titolo"] = "Prodotto non disponibile";
-    $templateParams["nome"] = "template/prodotto_esaurito.php";
-    $templateParams["css"] = "css/prodotto_esaurito.css";
+    $templateParams["nome"] = "template/prodotto-esaurito.php";
+    $templateParams["css"] = "css/prodotto-esaurito.css";
 }
 
 require 'template/base.php';

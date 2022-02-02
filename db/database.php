@@ -115,10 +115,10 @@ class DatabaseHelper{
         return $stmt->insert_id;
     }
 
-    public function insertShoesInCart($idCarrello, $idModello, $idTaglia){
-        $query = "INSERT INTO scarpe_carrello (codCarrello, codModello, codTaglia) VALUES (?, ?, ?)";
+    public function insertShoesInCart($idCarrello, $idModello, $idTaglia, $qta){
+        $query = "INSERT INTO scarpe_carrello (codCarrello, codModello, codTaglia, qtaCarrello) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("iii", $idCarrello, $idModello, $idTaglia);
+        $stmt->bind_param("iiii", $idCarrello, $idModello, $idTaglia, $qta);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -128,6 +128,23 @@ class DatabaseHelper{
         $query = "UPDATE utente SET codeCarrello = ? WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('is', $idCarrello, $idUtente);
+        
+        return $stmt->execute();
+    }
+
+    public function shoesInCart($idCarrello, $idModello, $idTaglia){
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello WHERE codCarrello=? AND codModello=? AND codTaglia=?");
+        $stmt->bind_param('iii',$idCarrello, $idModello, $idTaglia);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateQuantityInCart($qta, $idCarrello, $idModello, $idTaglia){
+        $query = "UPDATE scarpe_carrello SET qtaCarrello = ? WHERE codCarrello=? AND codModello=? AND codTaglia=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('iiii', $qta, $idCarrello, $idModello, $idTaglia);
         
         return $stmt->execute();
     }
