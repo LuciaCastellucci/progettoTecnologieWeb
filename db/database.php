@@ -149,5 +149,14 @@ class DatabaseHelper{
         return $stmt->execute();
     }
 
+    public function getShoesInCart($idCarrello){
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello WHERE codCarrello=?");
+        $stmt->bind_param('i',$idCarrello);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
 ?>
