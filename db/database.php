@@ -90,7 +90,7 @@ class DatabaseHelper{
     }
 
     public function getUserCart($user){
-        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, carrello WHERE codiceCarrello=codCarrello AND userCliente=?");
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, utente WHERE codeCarrello=codCarrello AND username=?");
         $stmt->bind_param('s',$user);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -106,10 +106,10 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function createCart($idCarrello, $idCliente){
-        $query = "INSERT INTO carrello (codiceCarrello, userCliente) VALUES (?, ?)";
+    public function createCart($idCarrello){
+        $query = "INSERT INTO carrello (codiceCarrello) VALUES (?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("is", $idCarrello, $idCliente);
+        $stmt->bind_param("i", $idCarrello);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -124,10 +124,10 @@ class DatabaseHelper{
         return $stmt->insert_id;
     }
 
-    public function updateCart($idUtente, $idCarrello){
-        $query = "UPDATE carrello SET userCliente = ? WHERE codiceCarrello = ?";
+    public function updateCart($idCarrello, $idUtente){
+        $query = "UPDATE utente SET codeCarrello = ? WHERE username = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('si', $idUtente, $idCarrello);
+        $stmt->bind_param('is', $idCarrello, $idUtente);
         
         return $stmt->execute();
     }

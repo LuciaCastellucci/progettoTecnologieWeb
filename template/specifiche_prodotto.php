@@ -3,7 +3,10 @@
         <img src="<?php $prodotto = $templateParams["prodotto"];
             echo UPLOAD_DIR.$prodotto["immagine"]; 
             ?>" class="card-img-top"/>
-        <?php $_SESSION["idModello"] = $prodotto["codiceModello"];?>
+        <?php 
+        unsetVar("codiceModello");
+        $_SESSION["codiceModello"] = $prodotto["codiceModello"];
+        ?>
         <div class="card-body">
             <h2 class="card-title"><?php echo "Nike ".$prodotto["tipo"]." ".$prodotto["altezza"];?></h2>
             <h4 class="card-subtitle"><?php echo $prodotto["descrizione"];?></h6>
@@ -15,7 +18,7 @@
             <?php if(isset($templateParams["erroretaglia"])): ?>
             <p><?php echo $templateParams["erroretaglia"]; ?></p>
             <?php endif; ?>
-            <label for="taglia" class="form-label">Seleziona una taglia</label>
+            <label for="taglia" class="form-label">Seleziona una taglia:</label>
             <select name="taglia" id="taglia" class="form-select" aria-label="Selezione taglia">
             <option></option>
             <?php foreach($templateParams["taglie"] as $taglia):?>

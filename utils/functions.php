@@ -30,7 +30,7 @@ function isCartSetted(){
 }
 
 function registerCart($idCart){
-    $_SESSION["carrello"] = $idCart["codiceCarrello"];
+    $_SESSION["carrello"] = $idCart;
 }
 
 ?>

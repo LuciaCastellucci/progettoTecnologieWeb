@@ -2,13 +2,13 @@
 require_once 'bootstrap.php';
 
 $id_modello = $_SESSION["codiceModello"];
-unsetVar("codiceModello");
 if($_GET["taglia"]!=""){
     $taglia = $_GET["taglia"];
-    if(isuserLoggedIn() & isCartSetted()) {
+    if(isCartSetted()) {
         $idCarrello = $_SESSION["carrello"];
     }
     else {
+        echo "carrello non settato procedo a settare l'id";
         if (count($dbh->getCarts())==0) {
             $idCarrello = 1;
         }
@@ -17,17 +17,10 @@ if($_GET["taglia"]!=""){
             $idCarrello = implode(",",$res[0]);
             $idCarrello = $idCarrello + 1;
         }
-        $result_cart = $dbh->createCart($idCarrello, NULL);
-        if($result_cart!=false){
-            $msg = "Inserimento completato correttamente!";
-            echo "carrello creato";
-            registerCart($idCarrello);
-        }
-        else{
-            $msg = "Errore in inserimento!";
-        }
+        $result_cart = $dbh->createCart($idCarrello);
+        registerCart($idCarrello);
     }
-    $id = $dbh->insertShoesInCart($idCarrello, $id_modello, $taglia);
+    $id = $dbh->insertShoesInCart($idCarrello, $id_modello, (int)$taglia);
     if($id!=false){
         $msg = "Inserimento completato correttamente!";
     }
