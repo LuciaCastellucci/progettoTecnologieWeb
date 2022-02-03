@@ -167,5 +167,14 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getShoesByType($idType){
+        $stmt = $this->db->prepare("SELECT * FROM modello WHERE tipo=?");
+        $stmt->bind_param('s',$idType);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
 ?>

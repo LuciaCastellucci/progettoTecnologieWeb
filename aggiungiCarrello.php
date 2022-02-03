@@ -53,8 +53,8 @@ if (count($result_product)!=0 && count($result_size)!=0) {
     $templateParams["prodotto"] = $result_product[0];
     $templateParams["taglie"] = $dbh->getSizesById($id_modello);
     $templateParams["titolo"] = "Prodotto";
-    $templateParams["nome"] = "template/specifiche_prodotto.php";
-    $templateParams["css"] = "css/specifiche_prodotto.css";
+    $templateParams["nome"] = "template/specifiche-prodotto.php";
+    $templateParams["css"] = "css/specifiche-prodotto.css";
 }
 else {
     $templateParams["titolo"] = "Prodotto non disponibile";

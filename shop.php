@@ -15,10 +15,20 @@ if (isUserLoggedIn()) {
     }
 }
 
+if(isset($_GET["tipo"])) {
+    $result_prod = $dbh->getShoesByType($_GET["tipo"]);
+    if (count($result)!=0) {
+        $templateParams["modelli"] = $result_prod;
+    }
+}
+else {
+    $templateParams["modelli"] = $dbh->getProducts();
+}
+
 $templateParams["titolo"] = "Shop Shoes";
 $templateParams["nome"] = "prodotti.php";
 $templateParams["css"] = "css/prodotti.css";
-$templateParams["modelli"] = $dbh->getProducts();
+
 
 require 'template/base.php';
 ?>

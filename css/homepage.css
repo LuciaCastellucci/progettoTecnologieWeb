@@ -19,25 +19,22 @@ div.carousel-caption {
 div.carousel-caption p {
     padding: 1% 0.25%;
 }
-.card {
+div.card {
     background-color: #c7a4ff;
     margin: 20px 150px;
+    align-items: center;
     text-align: center;
-    border-width: 5px;
-    background-color: #c7a4ff;
     max-width: 50%;
     max-height: 10%;
-    text-align: center;
     border-width: 5px;
 }
 div.carousel-caption {
     padding: 1px;
     background-color: #9575cd;
 }
-div.carousel-caption p {
-    padding: 1% 0.25%;
-}
-.card img.card-img-top {
+div.card img.card-img-top {
+    position: relative;
+    float: center;
     object-fit: contain;
 }
 button {

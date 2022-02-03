@@ -36,6 +36,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  
   <div class="row row-cols-1 row-cols-md-2 g-2">
     <div class="col">
       <div class="card mx-auto h-100">
@@ -43,7 +44,7 @@
         <div class="card-body">
           <h5 class="card-title">Jordan</h5>
           <p class="card-text">Scopri la nostra selezione di Nike Jordan.</p>
-          <a href="jordan.html" class="btn btn-primary">Scoprile</a>
+          <a href="shop.php?tipo=Jordan" class="btn btn-primary">Scoprile</a>
         </div>
       </div>
     </div>
@@ -53,7 +54,7 @@
         <div class="card-body">
           <h5 class="card-title">Dunk</h5>
           <p class="card-text">Scopri la nostra selezione di Nike Dunk.</p>
-          <a href="dunk.html" class="btn btn-primary">Scoprile</a>
+          <a href="shop.php?tipo=Dunk" class="btn btn-primary">Scoprile</a>
         </div>
       </div>
     </div>
