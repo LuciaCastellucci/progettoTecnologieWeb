@@ -38,23 +38,27 @@
   </div>
   
   <div class="row row-cols-1 row-cols-md-2 g-2">
-    <div class="col">
-      <div class="card mx-auto h-100">
-        <img src=".\resources\images\jordan.jpg" class="card-img-top" alt="jordan">
-        <div class="card-body">
-          <h5 class="card-title">Jordan</h5>
-          <p class="card-text">Scopri la nostra selezione di Nike Jordan.</p>
-          <a href="shop.php?tipo=Jordan" class="btn btn-primary">Scoprile</a>
+    <div class="container">
+      <div class="col">
+        <div class="card mx-auto h-100">
+          <img src=".\resources\images\jordan.jpg" class="card-img-top" alt="jordan">
+          <div class="card-body">
+            <h5 class="card-title">Jordan</h5>
+            <p class="card-text">Scopri la nostra selezione di Nike Jordan.</p>
+            <a href="shop.php?tipo=Jordan" class="btn btn-primary">Scoprile</a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="card mx-auto h-100">
-        <img src=".\resources\images\dunk.jpg" class="card-img-top" alt="dunk">
-        <div class="card-body">
-          <h5 class="card-title">Dunk</h5>
-          <p class="card-text">Scopri la nostra selezione di Nike Dunk.</p>
-          <a href="shop.php?tipo=Dunk" class="btn btn-primary">Scoprile</a>
+    <div class="container">
+      <div class="col">
+        <div class="card mx-auto h-100">
+          <img src=".\resources\images\dunk.jpg" class="card-img-top" alt="dunk">
+          <div class="card-body">
+            <h5 class="card-title">Dunk</h5>
+            <p class="card-text">Scopri la nostra selezione di Nike Dunk.</p>
+            <a href="shop.php?tipo=Dunk" class="btn btn-primary">Scoprile</a>
+          </div>
         </div>
       </div>
     </div>

@@ -63,6 +63,15 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function insertUser($idUser, $pw, $nome, $tipo){
+        $query = "INSERT INTO utente (username, pw, nome, tipo) VALUES (?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ssss", $idUser, $pw, $nome, $tipo);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
+
     public function productById($id){
         $stmt = $this->db->prepare("SELECT * FROM modello WHERE codiceModello = ?");
         $stmt->bind_param("i", $id);

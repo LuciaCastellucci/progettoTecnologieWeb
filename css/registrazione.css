@@ -20,3 +20,6 @@ input.w-100 {
   color: white;
   border-color: white;
 }
+form+p {
+  color: red;
+}
