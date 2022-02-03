@@ -10,7 +10,7 @@ if (isset($_SESSION["carrello"])) {
 
 if (isUserLoggedIn()) {
     $result_not = $dbh->getNotifications($_SESSION["username"]);
-    if (count($result)!=0) {
+    if (count($result_not)!=0) {
         $templateParams["notifiche"] = $result_not;
     }
 }

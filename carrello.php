@@ -1,9 +1,8 @@
 <?php
 require_once 'bootstrap.php';
 
-    $result = $dbh->getShoesInCart($_SESSION["carrello"]);
-    if (count($result)!=0) {
-        echo count($result);
+    $result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
+    if (count($result_shoes)!=0) {
         $templateParams["titolo"] = "Carrello";
         $templateParams["nome"] = "template/carrello-pieno.php";
         $templateParams["css"] = "css/carrello-pieno.css";

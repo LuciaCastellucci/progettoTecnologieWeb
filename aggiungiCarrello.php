@@ -1,6 +1,20 @@
 <?php
 require_once 'bootstrap.php';
 
+if (isset($_SESSION["carrello"])) {
+    $result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
+    if (count($result_shoes)!=0) {
+        $templateParams["scarpe"] = $result_shoes;
+    }
+}
+
+if (isUserLoggedIn()) {
+    $result_not = $dbh->getNotifications($_SESSION["username"]);
+    if (count($result_not)!=0) {
+        $templateParams["notifiche"] = $result_not;
+    }
+}
+
 $id_modello = $_SESSION["codiceModello"];
 if($_GET["taglia"]!=""){
     $taglia = $_GET["taglia"];

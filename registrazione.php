@@ -6,7 +6,7 @@ if(!isUserLoggedIn()){
     $templateParams["nome"] = "template/registrazione.php";
     $templateParams["css"] = "css/registrazione.css";
     $result_not = $dbh->getNotifications($_SESSION["username"]);
-    if (count($result)!=0) {
+    if (count($result_not)!=0) {
         $templateParams["notifiche"] = $result_not;
     }
 }
