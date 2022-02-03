@@ -55,6 +55,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
         }
     }
 }
+
 if(isUserLoggedIn()){
     require 'areaUtente.php';
 }
