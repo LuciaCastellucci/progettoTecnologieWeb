@@ -16,16 +16,23 @@ $totale = 0;
 foreach ($templateParams["scarpe"] as $scarpa) : 
 ?>
     <tr>
-      <th scope="row">1</th>
-      <td><?php echo UPLOAD_DIR.$scarpa["immagine"]; ?></td>
-      <td><?php echo "Nike ".$scarpa["tipo"]." ".$scarpa["altezza"].$scarpa["descrizione"];?></td>
+      <th scope="row">x<?php echo $scarpa["qtaCarrello"];?></th>
+      <td><img src="<?php echo UPLOAD_DIR.$scarpa["immagine"]; ?>" class="card-img-top"/></td>
+      <td>
+        <?php echo "Nike ".$scarpa["tipo"]." ".$scarpa["altezza"]." ".$scarpa["descrizione"];?>
+        <br>
+        <?php echo "Taglia: ".$scarpa["codTaglia"];?>
+      </td>
       <td><?php echo $scarpa["prezzo"]." €";
-      $totale = $totale + $scarpa["prezzo"]; ?> </td>
+      $totale = $totale + $scarpa["prezzo"]*$scarpa["qtaCarrello"]; ?> </td>
+      <td class="cancella">canc</td>
     </tr>
 <?php endforeach; ?> 
   </tbody>
 </table>
 
-<footer>
-    TOTALE: <?php echo $totale." €"; ?>
-<footer>
+<div class="container-cart">
+  <p>
+    Totale: <?php echo $totale." €"; ?>
+  </p>
+</div>

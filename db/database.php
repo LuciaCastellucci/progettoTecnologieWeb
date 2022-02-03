@@ -159,7 +159,7 @@ class DatabaseHelper{
     }
 
     public function getShoesInCart($idCarrello){
-        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello WHERE codCarrello=?");
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, modello WHERE codCarrello=? AND codiceModello=codModello");
         $stmt->bind_param('i',$idCarrello);
         $stmt->execute();
         $result = $stmt->get_result();
