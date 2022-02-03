@@ -10,16 +10,14 @@ if (isset($_SESSION["carrello"])) {
 
 if(isset($_POST["nome"]) && isset($_POST["username"]) && isset($_POST["password"])) {
     $id = $dbh->insertUser($_POST["username"],$_POST["password"],$_POST["nome"], "cliente");
-    if ($id!=false){
+    $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
+    if(count($login_result)!=0){
         $msg = "Inserimento completato correttamente!";
-
-        $user["nome"] = $_POST["nome"];
-        $user["username"] = $_POST["username"];
-        registerLoggedUser($user);
+        registerLoggedUser($login_result[0]);
     }
     else {
         $msg = "Errore in inserimento!";
-        $templateParams["erroreregistrazione"] = "Errore! Controllare username o password!";
+        $templateParams["erroreregistrazione"] = "Errore! Controllare l'inserimento dei dati!";
     }
     $result_not = $dbh->getNotifications($_POST["username"]);
     if (count($result_not)!=0) {

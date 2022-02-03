@@ -17,7 +17,7 @@ if (isUserLoggedIn()) {
 
 if(isset($_GET["tipo"])) {
     $result_prod = $dbh->getShoesByType($_GET["tipo"]);
-    if (count($result)!=0) {
+    if (count($result_prod)!=0) {
         $templateParams["modelli"] = $result_prod;
     }
 }
