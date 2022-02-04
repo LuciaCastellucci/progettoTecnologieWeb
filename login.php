@@ -42,15 +42,60 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
                 }
             }
         }
-        //se un utente aveva già iniziato a fare acquisti ed ha eseguito il login solo successivamente allora gli associo 
-        //il carrello nella variabile SESSIONE
+        //se un utente aveva già iniziato a fare acquisti ed ha eseguito il login solo successivamente 
         else {
-            $result_update = $dbh->updateCart($_SESSION["carrello"], $_POST["username"]);
-            if($result_update!=false){
-                $msg = "Inserimento completato correttamente!";
+            $result_cart1 = $dbh->getUserCart($_POST["username"]);
+            //se un utente nel suo account aveva già iniziato a fare acquisti, voglio che gli restino nel carrello
+            //per cui unisco al carrello precedente l'attuale carrello
+            if (count($result_cart1)!=0) {
+                //se il carrello in session non è vuoto
+                //allora prendo gli elementi nel carrello e li aggiungo al carrello precedente 
+                //ossia quello settato nel campo carrello della tabella utente
+                $result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
+                if (count($result_shoes)!=0) {
+                    //per ogni scarpa nel carrello in session
+                    foreach ($result_shoes as $scarpa):
+                        //controllo che non sia già presente nel carrello
+                        $result_shoes1 = $dbh->shoesInCart($result_cart1[0], $scarpa["codModello"], $scarpa["codTaglia"]);
+                        if (count($result_shoes1)!=0) {
+                            $scarpa = $result_shoes1[0];
+                            $qta = $scarpa["qtaCarrello"];
+                            $qta = $qta + 1;
+                            $dbh->updateQuantityInCart($qta, $result_cart1[0], $scarpa["codModello"], $scarpa["codTaglia"]);
+                        }
+                        //se non è già presente nel carrello la scarpa, allora la inserisco ex novo
+                        else {
+                            $id = $dbh->insertShoesInCart($result_cart1[0], $scarpa["codModello"], $scarpa["codTaglia"], 1);
+                            if($id!=false){
+                                $msg = "Inserimento completato correttamente!";
+                            }
+                            else{
+                                $msg = "Errore in inserimento!";
+                            }
+                        }
+                        $result_delete = $dbh->deleteShoesFromCart($_SESSION["carrello"], $scarpa["codModello"], $scarpa["codTaglia"]);
+                        if ($result_delete!=false) {
+                            $msg = "Cancellazione completata correttamente!";
+                        }
+                        else{
+                            $msg = "Errore in cancellazione!";
+                        }
+                    endforeach;
+                }
+                //cambio il carrello settato in session mettendo quello precedente
+                $dbh->deleteCart($_SESSION["carrello"]);
+                unsetVar("carrello");
+                registerCart($result_cart1[0]);
             }
-            else{
-                $msg = "Errore in inserimento!";
+            //se un utente non aveva ancora un carrello gli associo il carrello della variabile sessione
+            else {
+                $result_update = $dbh->updateCart($_SESSION["carrello"], $_POST["username"]);
+                if($result_update!=false){
+                    $msg = "Inserimento completato correttamente!";
+                }
+                else{
+                    $msg = "Errore in inserimento!";
+                }
             }
         }
     }

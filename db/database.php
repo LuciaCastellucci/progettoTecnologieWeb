@@ -174,6 +174,14 @@ class DatabaseHelper{
         $stmt->execute();
         return true;
     }
+
+    public function deleteCart($idCarrello){
+        $query = "DELETE FROM carrello WHERE codiceCarrello = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i',$idCarrello);
+        $stmt->execute();
+        return true;
+    }
     
     public function getShoesByType($idType){
         $stmt = $this->db->prepare("SELECT * FROM modello WHERE tipo=?");

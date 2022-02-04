@@ -1,6 +1,8 @@
 <?php
 require_once 'bootstrap.php';
 
+logout();
+
 if (isset($_SESSION["carrello"])) {
     $result = $dbh->getShoesInCart($_SESSION["carrello"]);
     if (count($result)!=0) {
@@ -14,8 +16,6 @@ if (isUserLoggedIn()) {
         $templateParams["notifiche"] = $result_not;
     }
 }
-
-logout();
 
 $templateParams["titolo"] = "Home";
 $templateParams["nome"] = "homepage.php";
