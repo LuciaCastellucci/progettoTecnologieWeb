@@ -1,15 +1,5 @@
 <table class="table caption-top">
   <caption>Carrello</caption>
-  <thead>
-    <tr>
-      <!--
-      <th scope="col">Ordine</th>
-      <th scope="col">Data</th>
-      <th scope="col">Scarpe</th>
-      <th scope="col">Importo</th>
-    -->
-    </tr>
-  </thead>
   <tbody>
 <?php 
 $totale = 0;

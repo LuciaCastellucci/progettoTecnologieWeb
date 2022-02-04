@@ -172,7 +172,6 @@ class DatabaseHelper{
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('iii',$idCarrello, $idModello, $idTaglia);
         $stmt->execute();
-        var_dump($stmt->error);
         return true;
     }
     

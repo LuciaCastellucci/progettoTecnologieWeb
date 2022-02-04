@@ -1,13 +1,6 @@
 <?php
 require_once 'bootstrap.php';
 
-if (isset($_SESSION["carrello"])) {
-    $result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
-    if (count($result_shoes)!=0) {
-        $templateParams["scarpe"] = $result_shoes;
-    }
-}
-
 if (isUserLoggedIn()) {
     $result_not = $dbh->getNotifications($_SESSION["username"]);
     if (count($result_not)!=0) {
@@ -61,11 +54,14 @@ if($_GET["taglia"]!=""){
 else {
     $templateParams["erroretaglia"] = "Inserisci una taglia prima di aggiungerla al carrello";
 }
+
 $result_product=$dbh->productById($id_modello);
 $result_size=$dbh->getSizesById($id_modello);
-if (count($result_product)!=0 && count($result_size)!=0) {
+$result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
+if (count($result_product)!=0 && count($result_size)!=0 && count($result_shoes)!=0) {
     $templateParams["prodotto"] = $result_product[0];
     $templateParams["taglie"] = $dbh->getSizesById($id_modello);
+    $templateParams["scarpe"] = $result_shoes;
     $templateParams["titolo"] = "Prodotto";
     $templateParams["nome"] = "template/specifiche-prodotto.php";
     $templateParams["css"] = "css/specifiche-prodotto.css";
