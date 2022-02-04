@@ -167,18 +167,27 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getNotifications($idUser){
-        $stmt = $this->db->prepare("SELECT * FROM notifiche WHERE usernameUtente=?");
-        $stmt->bind_param('s',$idUser);
+    public function deleteShoesFromCart($idCarrello, $idModello, $idTaglia){
+        $query = "DELETE FROM scarpe_carrello WHERE codCarrello = ? AND codModello = ? and codTaglia=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('iii',$idCarrello, $idModello, $idTaglia);
+        $stmt->execute();
+        var_dump($stmt->error);
+        return true;
+    }
+    
+    public function getShoesByType($idType){
+        $stmt = $this->db->prepare("SELECT * FROM modello WHERE tipo=?");
+        $stmt->bind_param('s',$idType);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getShoesByType($idType){
-        $stmt = $this->db->prepare("SELECT * FROM modello WHERE tipo=?");
-        $stmt->bind_param('s',$idType);
+    public function getNotifications($idUser){
+        $stmt = $this->db->prepare("SELECT * FROM notifiche WHERE usernameUtente=?");
+        $stmt->bind_param('s',$idUser);
         $stmt->execute();
         $result = $stmt->get_result();
 

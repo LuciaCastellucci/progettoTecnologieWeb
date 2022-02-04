@@ -1,6 +1,16 @@
 <?php
 require_once 'bootstrap.php';
 
+if(isset($_GET["id"]) && isset($_GET["taglia"])){
+    $result_delete = $dbh->deleteShoesFromCart($_SESSION["carrello"], $_GET["id"], $_GET["taglia"]);
+    if ($result_delete!=false) {
+        $msg = "Cancellazione completata correttamente!";
+    }
+    else{
+        $msg = "Errore in cancellazione!";
+    }
+}
+
 if (isset($_SESSION["carrello"])) {
     $result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
     if (count($result_shoes)!=0) {

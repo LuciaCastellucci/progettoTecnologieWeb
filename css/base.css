@@ -43,3 +43,6 @@ footer p {
 footer+img {
     max-height: 1%;
 }
+a.nav-link:hover{
+    color: #c7a4ff;
+}

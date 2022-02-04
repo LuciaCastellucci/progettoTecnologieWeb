@@ -40,7 +40,11 @@
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             <?php 
             if (isset($templateParams["scarpe"])) {
-              echo count($templateParams["scarpe"]);
+              $totale = 0;
+              foreach ($templateParams["scarpe"] as $scarpa) : 
+                $totale = $totale + $scarpa["qtaCarrello"];
+              endforeach;
+              echo $totale;
             }
             else {
               echo "0";
