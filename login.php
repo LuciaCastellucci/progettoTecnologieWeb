@@ -7,12 +7,12 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
         //Login fallito
         $templateParams["errorelogin"] = "Errore! Controllare username o password!";
     }
-    else{
+    else {
         registerLoggedUser($login_result[0]);
         //se il carrello non è stato settato nella variabile sessione allora devo rimediare
         if (!isCartSetted()) {
             //se l'utente ha già un carrello associato da sessioni precedenti allora lo conservo
-            $result = $dbh->getUserCart($_POST["username"]);
+             $result = $dbh->getUserCart($_POST["username"]);
             if (count($result)!=0) {
                 registerCart($result[0]);
             }
@@ -95,6 +95,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
                 }
                 else{
                     $msg = "Errore in inserimento!";
+                    
                 }
             }
         }
@@ -108,18 +109,36 @@ if (isset($_SESSION["carrello"])) {
     }
 }
 
-if(isUserLoggedIn()){
-    $result_not = $dbh->getNotifications($_SESSION["username"]);
-    if (count($result_not)!=0) {
-        $templateParams["notifiche"] = $result_not;
+if (isset($_GET["action"]) && $_GET["action"]==1) {
+    if(isUserLoggedIn()){
+        $result_not = $dbh->getNotifications($_SESSION["username"]);
+        if (count($result_not)!=0) {
+            $templateParams["notifiche"] = $result_not;
+        }
+        require 'checkout.php';
     }
-    require 'areaUtente.php';
+    else{
+        $templateParams["titolo"] = "Login";
+        $templateParams["nome"] = "template/login-form.php";
+        $templateParams["css"] = "css/login.css";
+        $templateParams["action"] = "checkout";
+        require 'template/base_header.php';
+    }
 }
-else{
-    $templateParams["titolo"] = "Login";
-    $templateParams["nome"] = "template/login-form.php";
-    $templateParams["css"] = "css/login.css";
-    require 'template/base_header.php';
+else {
+    if(isUserLoggedIn()){
+        $result_not = $dbh->getNotifications($_SESSION["username"]);
+        if (count($result_not)!=0) {
+            $templateParams["notifiche"] = $result_not;
+        }
+        require 'areaUtente.php';
+    }
+    else{
+        $templateParams["titolo"] = "Login";
+        $templateParams["nome"] = "template/login-form.php";
+        $templateParams["css"] = "css/login.css";
+        require 'template/base_header.php';
+    }
 }
 
 ?>

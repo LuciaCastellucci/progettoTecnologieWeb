@@ -1,13 +1,16 @@
 <div class="container">
-    <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="./resources/images/logo.png" alt="" width="72" height="57">
-      <h2>Login</h2>
+    <div class="py-4 text-center">
+      <!--<img class="d-block mx-auto mb-4" src="./resources/images/logo.png" alt="" width="72" height="57">-->
+      <h4>Login</h4>
       <p class="lead">Inserisci le tue credenziali per accedere all'area riservata.</p>
     </div>
 
-    <form action="login.php" method="POST">
+    <form action="login.php<?php if (isset($templateParams["action"]) && $templateParams["action"]=="checkout") {
+        echo "?action=1";
+        }
+        ?>" method="POST">
         <?php if(isset($templateParams["errorelogin"])): ?>
-        <p><?php echo $templateParams["errorelogin"]; ?></p>
+        <p class="error"><?php echo $templateParams["errorelogin"]; ?></p>
         <?php endif; ?>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
@@ -19,6 +22,16 @@
         </div>
         <input type="submit" class="w-100 btn btn-primary" name="submit" value="Accedi" />
     </form>
+
+    <p class="reg"> Oppure, se non sei ancora registrato: <p>
+        <a href="registrazione.php<?php if (isset($templateParams["action"]) && $templateParams["action"]=="checkout") {
+        echo "?action=1";
+        }
+        ?>"> 
+        <button type="button" class="w-100 btn btn-primary">
+      Registrati
+    </button>
+        </a>
 </div>
 
 

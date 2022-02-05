@@ -24,15 +24,25 @@ td.cancella {
     width: 3%;
 }
 div.container-cart {
-    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     margin-top: 1px;
     background-color: #65499c;
     height: 10%;
     color:white;
 }
-div.container-cart p {
+div.container-cart p.total {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: bold;
-    font-size: 1.5em;
-    text-align: center;
+    font-size: 1.2em;
+}
+div.container-cart a.order {
+    margin-right: 0%;
+    font-size: 0.5em;
+}
+div.container-cart button.btn {
+    background-color: white;
+    color: #65499c;
+    border-color: #65499c;
 }

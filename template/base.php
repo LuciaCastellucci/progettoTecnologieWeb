@@ -10,6 +10,11 @@
 
     <!--  -->
     <title><?php echo $templateParams["titolo"]; ?></title>
+
+    <?php if(isset($templateParams["js"])): ?>
+    <link href=<?php echo $templateParams["js"]; ?> rel="stylesheet" type="text/javascript"/>
+    <?php endif; ?>
+
     <link href=<?php echo $templateParams["css"]; ?> rel="stylesheet" type="text/css"/>
     <link href="./css/base.css" rel="stylesheet" type="text/css"/>
   </head>

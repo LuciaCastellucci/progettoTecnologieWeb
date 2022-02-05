@@ -1,11 +1,14 @@
 <div class="container">
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="./resources/images/logo.png" alt="" width="72" height="57">
-      <h2>Registrazione cliente</h2>
+      <!--<img class="d-block mx-auto mb-4" src="./resources/images/logo.png" alt="" width="72" height="57">-->
+      <h4>Registrazione cliente</h2>
       <p class="lead">Inserisci i tuoi dati per creare un account sul nostro sito. Grazie al tuo account potrai completare i tuoi acquisti!</p>
     </div>
 
-    <form action="registrazione.php" method="POST">
+    <form action="registrazione.php<?php if (isset($templateParams["action"]) && $templateParams["action"]=="checkout") {
+        echo "?action=1";
+        }
+        ?>" method="POST">
         <?php if(isset($templateParams["erroreregistrazione"])): ?>
         <p><?php echo $templateParams["erroreregistrazione"]; ?></p>
         <?php endif; ?>

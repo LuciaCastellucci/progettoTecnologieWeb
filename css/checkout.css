@@ -1,8 +1,4 @@
-body {
-    font-family: Arial;
-    font-size: 17px;
-    padding: 8px;
-  }
+
   
   * {
     box-sizing: border-box;
@@ -19,6 +15,7 @@ body {
   .col-25 {
     -ms-flex: 25%; /* IE10 */
     flex: 25%;
+    margin-top: 5%;
   }
   
   .col-50 {
@@ -37,7 +34,7 @@ body {
     padding: 0 16px;
   }
   
-  .container {
+  div.col-75 div.container {
     background-color: #f2f2f2;
     padding: 5px 20px 15px 20px;
     border: 1px solid lightgrey;
@@ -63,8 +60,8 @@ body {
     font-size: 24px;
   }
   
-  .btn {
-    background-color: #a04594;
+  form.btn {
+    background-color: #65499c;
     color: white;
     padding: 12px;
     margin: 10px 0;
@@ -76,7 +73,7 @@ body {
   }
   
   .btn:hover {
-    background-color: #a04594;
+    background-color: #65499c;
   }
   
   a {

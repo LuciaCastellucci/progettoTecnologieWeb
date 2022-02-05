@@ -13,6 +13,20 @@ div.container {
   div.col-md-10 {
     float: center;
   }
+  div.py-5 {
+    max-height: 25%;
+  }
+  p.reg {
+    margin-top: 2%;
+    text-align: center;
+  }
+  img.d-block {
+    max-height: 10%;
+  }
+  a button.btn{
+    position: relative;
+    float: center;
+  }
   input.w-100:hover, input.w-100:active, input.w-100:link, input.w-100:focus {
     background-color: white;
     color: #65499c;
@@ -23,6 +37,6 @@ div.container {
     color: white;
     border-color: white;
   }
-  form+p {
+  form p.error {
     color: red;
   }

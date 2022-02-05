@@ -30,7 +30,12 @@ foreach ($templateParams["scarpe"] as $scarpa) :
 </table>
 
 <div class="container-cart">
-  <p>
+  <p class="total">
     Totale: <?php echo $totale." €"; ?>
   </p>
+  <a class="order" href="login.php?action=1">
+    <button type="button" class="btn btn-primary">
+      Procedi con l'ordine
+    </button>
+  </a>
 </div>
