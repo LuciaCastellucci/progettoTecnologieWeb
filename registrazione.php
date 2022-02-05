@@ -27,6 +27,7 @@ if (isset($_GET["action"]) && $_GET["action"]==1) {
         require 'checkout.php';
     }
     else {
+        echo "sono passata di qui";
         $templateParams["titolo"] = "Registrazione";
         $templateParams["nome"] = "template/registrazione.php";
         $templateParams["css"] = "css/registrazione.css";
