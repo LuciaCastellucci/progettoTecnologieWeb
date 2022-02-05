@@ -11,13 +11,21 @@ if(isset($_GET["id"]) && isset($_GET["taglia"])){
     }
 }
 
-if (isset($_SESSION["carrello"])) {
+if (isset($_GET["action"]) && $_GET["action"]==1) {
+    if (isset($_SESSION["carrello"])) {
     $result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
-    if (count($result_shoes)!=0) {
-        $templateParams["titolo"] = "Carrello";
-        $templateParams["nome"] = "template/carrello-pieno.php";
-        $templateParams["css"] = "css/carrello-pieno.css";
-        $templateParams["scarpe"] = $dbh->getShoesInCart($_SESSION["carrello"]);
+        if (count($result_shoes)!=0) {
+            $templateParams["titolo"] = "Checkout";
+            $templateParams["nome"] = "template/checkout-form.php";
+            $templateParams["css"] = "css/checkout.css";
+            $templateParams["js"] = "js/form.css";
+            $templateParams["scarpe"] = $dbh->getShoesInCart($_SESSION["carrello"]);
+        }
+        else {
+            $templateParams["titolo"] = "Carrello";
+            $templateParams["nome"] = "template/carrello-vuoto.php";
+            $templateParams["css"] = "css/carrello-vuoto.css";
+        }
     }
     else {
         $templateParams["titolo"] = "Carrello";
@@ -26,10 +34,25 @@ if (isset($_SESSION["carrello"])) {
     }
 }
 else {
-    $templateParams["titolo"] = "Carrello";
-    $templateParams["nome"] = "template/carrello-vuoto.php";
-    $templateParams["css"] = "css/carrello-vuoto.css";
+    if (isset($_SESSION["carrello"])) {
+        $result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
+        if (count($result_shoes)!=0) {
+            $templateParams["titolo"] = "Carrello";
+            $templateParams["nome"] = "template/carrello-pieno.php";
+            $templateParams["css"] = "css/carrello-pieno.css";
+            $templateParams["scarpe"] = $dbh->getShoesInCart($_SESSION["carrello"]);
+        }
+        else {
+            $templateParams["titolo"] = "Carrello";
+            $templateParams["nome"] = "template/carrello-vuoto.php";
+            $templateParams["css"] = "css/carrello-vuoto.css";
+        }
+    }
+    else {
+        $templateParams["titolo"] = "Carrello";
+        $templateParams["nome"] = "template/carrello-vuoto.php";
+        $templateParams["css"] = "css/carrello-vuoto.css";
+    }
 }
-
 require 'template/base.php';
 ?>

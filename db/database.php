@@ -167,8 +167,17 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getShoesQuantity($idModello, $idTaglia){
+        $stmt = $this->db->prepare("SELECT qtaMagazzino FROM scarpe WHERE codModello = ? and codTaglia=?");
+        $stmt->bind_param('ii',$idModello, $idTaglia);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function deleteShoesFromCart($idCarrello, $idModello, $idTaglia){
-        $query = "DELETE FROM scarpe_carrello WHERE codCarrello = ? AND codModello = ? and codTaglia=?";
+        $query = "DELETE FROM scarpe_carrello WHERE codCarrello = ? AND codModello = ? AND codTaglia=?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('iii',$idCarrello, $idModello, $idTaglia);
         $stmt->execute();
@@ -181,6 +190,14 @@ class DatabaseHelper{
         $stmt->bind_param('i',$idCarrello);
         $stmt->execute();
         return true;
+    }
+
+    public function updateQuantityInWarehouse($qta, $idModello, $idTaglia){
+        $query = "UPDATE scarpa SET qtaMagazzino = ? WHERE codModello=? AND codTaglia=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('iii', $qta, $idModello, $idTaglia);
+        
+        return $stmt->execute();
     }
     
     public function getShoesByType($idType){
@@ -200,6 +217,25 @@ class DatabaseHelper{
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function createOrder($data, $indirizzo, $citta, $cap, $idCarrello){
+        $query = "INSERT INTO ordine (dataOrdine, indirizzoSpedizione, cittaSpedizione, CAP, codCarrello) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ssssi", $data, $indirizzo, $citta, $cap, $idCarrello);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
+
+    public function createNotifications($titolo, $descrizione, $idUtente, $data){
+        $query = "INSERT INTO notifiche (titolo, descrizione, usernameUtente) VALUES (?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sss", $titolo, $descrizione, $idUtente);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
+ 
 
 }
 ?>

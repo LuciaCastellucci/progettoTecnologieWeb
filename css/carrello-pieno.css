@@ -27,6 +27,7 @@ div.container-cart {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
     margin-top: 1px;
     background-color: #65499c;
     height: 10%;
