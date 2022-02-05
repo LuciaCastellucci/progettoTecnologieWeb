@@ -168,7 +168,7 @@ class DatabaseHelper{
     }
 
     public function getShoesQuantity($idModello, $idTaglia){
-        $stmt = $this->db->prepare("SELECT qtaMagazzino FROM scarpe WHERE codModello = ? and codTaglia=?");
+        $stmt = $this->db->prepare("SELECT qtaMagazzino FROM scarpa WHERE codModello = ? and codTaglia=?");
         $stmt->bind_param('ii',$idModello, $idTaglia);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -219,7 +219,7 @@ class DatabaseHelper{
     }
 
     public function createOrder($data, $indirizzo, $citta, $cap, $idCarrello){
-        $query = "INSERT INTO ordine (dataOrdine, indirizzoSpedizione, cittaSpedizione, CAP, codCarrello) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO ordine (dataOrdine, indirizzoSpedizione, cittàSpedizione, CAP, codCarrello) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ssssi", $data, $indirizzo, $citta, $cap, $idCarrello);
         $stmt->execute();

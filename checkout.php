@@ -5,10 +5,10 @@ if (isset($_POST["indirizzo"]) && isset($_POST["città"]) && isset($_POST["cap"]
     && isset ($_POST["cvv"]) ) {
     $timestamp = strtotime("now");
     $data = (string)date('d/m/Y H:i:s', $timestamp);
-    $result_order = $dbh->createOrder($data, $_POST["indirizzo"], $_POST["città"], $_POST["cap"], $_SESSION("carrello"));
+    $result_order = $dbh->createOrder($data, $_POST["indirizzo"], $_POST["città"], $_POST["cap"], $_SESSION["carrello"]);
     $result_notify = $dbh->createNotifications("Ordine ricevuto", "Hai ricevuto un nuovo ordine", "admin", $data);
-    $result_update = $dbh->updateCart(NULL, $_SESSION["username"]);
-    if ($result_order!=false && $result_notify!=false && $result_update!=false && $result_quantity!=false) {
+    $result_delete = $dbh->deleteShoesFromCart($_SESSION["carrello"], $scarpa["codModello"], $scarpa["codTaglia"]);
+    if ($result_order!=false && $result_notify!=false && $result_delete!=false) {
         $templateParams["titolo"] = "Grazie!";
         $templateParams["nome"] = "template/grazie.php";
         $templateParams["css"] = "css/grazie.css";
@@ -19,7 +19,7 @@ if (isset($_POST["indirizzo"]) && isset($_POST["città"]) && isset($_POST["cap"]
             if (count($result_qty)!=0) {
                 $qta = $result_qty[0]["qtaMagazzino"];
                 $qta = $qta - $scarpa["qtaCarrello"];
-                $result_quantity = $dbh->updateQuantityInWarehouse($qta, $idModello, $idTaglia);
+                $result_quantity = $dbh->updateQuantityInWarehouse($qta, $scarpa["codModello"], $scarpa["codTaglia"]);
                 if ($result_quantity!=false) {
                     $msg = "Aggiornamento eseguito correttamente!";
                 }
