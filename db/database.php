@@ -167,6 +167,15 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getShoesInOrder($idCarrello){
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, modello, ordine WHERE codCarrello=? AND codiceModello=codModello AND codiCarrello=codCarrello");
+        $stmt->bind_param('i',$idCarrello);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getShoesQuantity($idModello, $idTaglia){
         $stmt = $this->db->prepare("SELECT qtaMagazzino FROM scarpa WHERE codModello = ? and codTaglia=?");
         $stmt->bind_param('ii',$idModello, $idTaglia);
@@ -210,7 +219,7 @@ class DatabaseHelper{
     }
 
     public function getNotifications($idUser){
-        $stmt = $this->db->prepare("SELECT * FROM notifiche WHERE usernameUtente=?");
+        $stmt = $this->db->prepare("SELECT * FROM notifiche WHERE usernameUtente=? ORDER BY codiceNotifica DESC");
         $stmt->bind_param('s',$idUser);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -218,22 +227,30 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function createOrder($data, $indirizzo, $citta, $cap, $idCarrello){
-        $query = "INSERT INTO ordine (dataOrdine, indirizzoSpedizione, cittàSpedizione, CAP, codCarrello) VALUES (?, ?, ?, ?, ?)";
+    public function createOrder($data, $recapito, $indirizzo, $citta, $cap, $idCarrello){
+        $query = "INSERT INTO ordine (dataOrdine, recapito, indirizzoSpedizione, cittàSpedizione, CAP, codiCarrello) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("ssssi", $data, $indirizzo, $citta, $cap, $idCarrello);
+        $stmt->bind_param("sssssi", $data, $recapito, $indirizzo, $citta, $cap, $idCarrello);
         $stmt->execute();
         
         return $stmt->insert_id;
     }
 
-    public function createNotifications($titolo, $descrizione, $idUtente, $data){
-        $query = "INSERT INTO notifiche (titolo, descrizione, usernameUtente) VALUES (?, ?, ?)";
+    public function createNotifications($titolo, $descrizione, $idUtente, $data, $visto){
+        $query = "INSERT INTO notifiche (titolo, descrizione, usernameUtente, dataNotifica) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sss", $titolo, $descrizione, $idUtente);
+        $stmt->bind_param("sssss", $titolo, $descrizione, $idUtente, $data, $visto);
         $stmt->execute();
         
         return $stmt->insert_id;
+    }
+
+    public function updateSeen($idNotifica, $visto){
+        $query = "UPDATE notifiche SET visto = ? WHERE codiceNotifica=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('is', $idNotifica, $visto);
+        
+        return $stmt->execute();
     }
  
 

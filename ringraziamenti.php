@@ -15,15 +15,11 @@ if (isUserLoggedIn()) {
     if (count($result_not)!=0) {
         $templateParams["notifiche"] = $result_not;
     }
-    $login_result = $dbh->isAdmin($_SESSION["username"]);
-    if(count($login_result)!=0) {
-        $templateParams["tipoUtente"] = "Admin";
-    }
 }
 
-$templateParams["titolo"] = "Home";
-$templateParams["nome"] = "homepage.php";
-$templateParams["css"] = "css/homepage.css";
+$templateParams["titolo"] = "Grazie!";
+$templateParams["nome"] = "template/grazie.php";
+$templateParams["css"] = "css/grazie.css";
 
 
 require 'template/base.php';

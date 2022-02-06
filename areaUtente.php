@@ -25,6 +25,7 @@ else{
     $templateParams["titolo"] = "Admin";
     $templateParams["nome"] = "template/areaAdmin.php";
     $templateParams["css"] = "css/areaUtente.css";
+    $templateParams["tipoUtente"] = "Admin";
 }
 
 require 'template/base.php';

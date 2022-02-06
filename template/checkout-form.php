@@ -17,7 +17,7 @@
           </div>
           <div class="col-3">
             <p> 
-              <?php echo $scarpa["prezzo"]." €";
+              <?php echo $scarpa["qtaCarrello"]."x".$scarpa["prezzo"]." €";
               $totale = $totale + $scarpa["prezzo"]*$scarpa["qtaCarrello"]; ?>
               <a href="carrello.php?id=<?php echo $scarpa["codModello"]?>&taglia=<?php echo $scarpa["codTaglia"]?>&action=1" class="canc">
                 <button type="button" class="btn btn-primary position-relative btn-sm">
@@ -40,8 +40,10 @@
 
   <div class="col-75">
     <div class="container">
-      <form action="checkout.php" class="needs-validation" novalidate method="POST">
-
+      <form action="checkout.php" method="POST">
+      <?php if(isset($templateParams["errorecheckout"])): ?>
+        <p class="error"><?php echo $templateParams["errorecheckout"]; ?></p>
+        <?php endif; ?>
         <div class="row">
           <div class="col-50">
             <h3>Indirizzo di spedizione</h3>

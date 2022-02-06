@@ -15,6 +15,8 @@ if (isUserLoggedIn()) {
     }
 }
 
+
+
 $result_product=$dbh->productById($_GET["id"]);
 $result_size=$dbh->getSizesById($_GET["id"]);
 if (count($result_product)!=0 && count($result_size)!=0) {

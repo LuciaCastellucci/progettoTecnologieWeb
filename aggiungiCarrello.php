@@ -38,7 +38,13 @@ if($_GET["taglia"]!=""){
         $scarpa = $result[0];
         $qta = $scarpa["qtaCarrello"];
         $qta = $qta + 1;
-        $dbh->updateQuantityInCart($qta, $idCarrello, $id_modello, (int)$taglia);
+        $result_qty = $dbh->getShoesQuantity($scarpa["codModello"], $scarpa["codTaglia"]);
+        if ($qta>$result_qty[0]["qtaMagazzino"]) {
+            $templateParams["errorequantità"] = "La scarpa desiderata è disponibile solo nel quantitativo già nel carrello";
+        } 
+        else {
+            $dbh->updateQuantityInCart($qta, $idCarrello, $id_modello, (int)$taglia);
+        }
     }
     //se non è già presente nel carrello la scarpa, allora la inserisco ex novo
     else {

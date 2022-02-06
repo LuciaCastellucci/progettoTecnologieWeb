@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
 }
-
 div.container {
   align-items: center;
 }
@@ -12,34 +11,28 @@ div.container {
   flex-wrap: wrap;
   margin: 0 -16px;
 }
-  
 .col-25 {
   -ms-flex: 25%; /* IE10 */
   flex: 25%;
   margin-top: 5%;
-}
-  
+} 
 .col-50 {
   -ms-flex: 50%;
   flex: 50%;
 }
-  
 .col-75 {
   -ms-flex: 75%;
   flex: 75%;
 }
-  
 .col-25, .col-50, .col-75 {
   padding: 0 16px;
 }
-  
 div.col-75 div.container {
   background-color: #c7a4ff;;
   padding: 5px 20px 15px 20px;
   border: 1px solid lightgrey;
   border-radius: 3px;
-}
-  
+}  
 input[type=text] {
   width: 100%;
   margin-bottom: 20px;
@@ -47,18 +40,15 @@ input[type=text] {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-  
 label {
   margin-bottom: 10px;
   display: block;
 }
-  
 .icon-container {
   margin-bottom: 20px;
   padding: 7px 0;
   font-size: 24px;
 }
-  
 form.btn {
   background-color: #65499c;
   color: white;
@@ -70,15 +60,12 @@ form.btn {
   cursor: pointer;
   font-size: 17px;
 }
-  
 .btn:hover {
   background-color: #65499c;
-}
-  
+} 
 a {
   color: #2196F3;
 }
-  
 hr {
   border: 1px solid lightgrey;
 }
@@ -110,4 +97,7 @@ h3 {
 }
 div.row p.totale {
   text-align: right;
+}
+form p.error {
+  color: red;
 }

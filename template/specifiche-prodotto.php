@@ -18,6 +18,9 @@
             <?php if(isset($templateParams["erroretaglia"])): ?>
             <p><?php echo $templateParams["erroretaglia"]; ?></p>
             <?php endif; ?>
+            <?php if(isset($templateParams["errorequantità"])): ?>
+            <p><?php echo $templateParams["errorequantità"]; ?></p>
+            <?php endif; ?>
             <label for="taglia" class="form-label">Seleziona una taglia:</label>
             <select name="taglia" id="taglia" class="form-select" aria-label="Selezione taglia">
             <option></option>

@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+img.figure-img {
+    object-fit: contain;
+    max-width: 100%;
+}
+h2 {
+    text-align: center;
+    font-weight: bold;
+}
+strong {
+    font-weight: bold;
+}

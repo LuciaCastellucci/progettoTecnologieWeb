@@ -131,6 +131,9 @@ else {
         if (count($result_not)!=0) {
             $templateParams["notifiche"] = $result_not;
         }
+        if(count($login_result)!=0) {
+            $templateParams["tipoUtente"] = "Admin";
+        }
         require 'areaUtente.php';
     }
     else{

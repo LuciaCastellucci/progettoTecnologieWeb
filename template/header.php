@@ -32,6 +32,7 @@
           </button>
           </a>
           <?php endif; ?>
+          <?php if (!isset($templateParams["tipoUtente"])): ?>
           <a href="carrello.php">
           <button type="button" class="btn btn-primary position-relative">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -54,6 +55,7 @@
             </span>
           </button>
           </a>
+          <?php endif; ?>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -63,7 +65,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <?php 
             if(isUserLoggedIn()) {
-               echo "   Ciao ";
+               echo "Ciao ";
                echo $_SESSION["nome"];
               }
             ?>
