@@ -35,6 +35,14 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getShoes(){
+        $stmt = $this->db->prepare("SELECT * FROM scarpa");
+        $stmt->execute(); 
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getRandomProducts($n){
         $stmt = $this->db->prepare("SELECT immagine, modello, tipo, descrizione FROM modello, scarpa WHERE codiceModello=codModello ORDER BY RAND() LIMIT ?");
         $stmt->bind_param("i", $n);
@@ -107,6 +115,15 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getUser($user){
+        $stmt = $this->db->prepare("SELECT * FROM utente WHERE username=?");
+        $stmt->bind_param('s',$user);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function lastCartCode(){
         $stmt = $this->db->prepare("SELECT MAX(codiceCarrello) FROM carrello");
         $stmt->execute();
@@ -167,6 +184,23 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getOrders(){
+        $stmt = $this->db->prepare("SELECT * FROM ordine");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getOrdersByUser($idCliente){
+        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE codiCliente=?");
+        $stmt->bind_param('s',$idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getShoesInOrder($idCarrello){
         $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, modello, ordine WHERE codCarrello=? AND codiceModello=codModello AND codiCarrello=codCarrello");
         $stmt->bind_param('i',$idCarrello);
@@ -176,8 +210,17 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getShoesInOrderByOrder($idOrdine){
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, modello, ordine WHERE numOrdine=? AND codiceModello=codModello AND codiCarrello=codCarrello");
+        $stmt->bind_param('i',$idOrdine);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getShoesQuantity($idModello, $idTaglia){
-        $stmt = $this->db->prepare("SELECT qtaMagazzino FROM scarpa WHERE codModello = ? and codTaglia=?");
+        $stmt = $this->db->prepare("SELECT qtaMagazzino FROM scarpa WHERE codModello = ? AND codTaglia=?");
         $stmt->bind_param('ii',$idModello, $idTaglia);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -227,10 +270,10 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function createOrder($data, $recapito, $indirizzo, $citta, $cap, $idCarrello){
-        $query = "INSERT INTO ordine (dataOrdine, recapito, indirizzoSpedizione, cittàSpedizione, CAP, codiCarrello) VALUES (?, ?, ?, ?, ?, ?)";
+    public function createOrder($data, $recapito, $indirizzo, $citta, $cap, $idCarrello, $idUtente){
+        $query = "INSERT INTO ordine (dataOrdine, recapito, indirizzoSpedizione, cittàSpedizione, CAP, codiCarrello, codiCliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("sssssi", $data, $recapito, $indirizzo, $citta, $cap, $idCarrello);
+        $stmt->bind_param("sssssis", $data, $recapito, $indirizzo, $citta, $cap, $idCarrello, $idUtente);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -245,14 +288,21 @@ class DatabaseHelper{
         return $stmt->insert_id;
     }
 
-    public function updateSeen($idNotifica, $visto){
+    public function updateSeen($visto, $idNotifica){
         $query = "UPDATE notifiche SET visto = ? WHERE codiceNotifica=?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('is', $idNotifica, $visto);
+        $stmt->bind_param('si', $visto, $idNotifica);
         
         return $stmt->execute();
     }
  
+    public function updateUser($nome, $password, $user){
+        $query = "UPDATE utente SET nome = ?, pw = ? WHERE username = ?" ;
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sss', $nome, $password, $user);
+        
+        return $stmt->execute();
+    }
 
 }
 ?>

@@ -12,13 +12,13 @@ if (isset($_GET["action"]) && $_GET["action"]==1) {
     $nome = htmlspecialchars($_POST["nome"]);
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);
-    //if(isset($_POST["nome"]) && isset($_POST["username"]) && isset($_POST["password"])) {
+    if(isset($_POST["nome"]) && isset($_POST["username"]) && isset($_POST["password"])) {
     //if($_POST["nome"]!=NULL && $_POST["username"]!=NULL && $_POST["password"]!=NULL) {
     //if(!empty($_POST["nome"]) && !empty($_POST["username"]) && !empty($_POST["password"])) {
     //if($_POST["nome"]!='' && $_POST["username"]!='' && $_POST["password"]!='') {
     //if(htmlspecialchars($_POST["nome"])!='' && htmlspecialchars($_POST["username"])!='' && htmlspecialchars($_POST["password"])!='') {
-    //if(isset($nome) && isset($username) && isset($password)) {   
-    if(!empty($nome) and !empty($username) and !empty($password)) {
+    //if(isSet($nome) && isSet($username) && isSet($password)) {   
+    //if(!empty($nome) and !empty($username) and !empty($password)) {
         $id = $dbh->insertUser($_POST["username"],$_POST["password"],$_POST["nome"], "cliente");
         $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
         if(count($login_result)!=0){

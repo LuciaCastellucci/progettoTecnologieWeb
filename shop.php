@@ -13,13 +13,11 @@ if (isUserLoggedIn()) {
     if (count($result_not)!=0) {
         $templateParams["notifiche"] = $result_not;
     }
+    $login_result = $dbh->isAdmin($_SESSION["username"]);
+    if(count($login_result)!=0) {
+        $templateParams["tipoUtente"] = "Admin";
+    }
 }
-
-$login_result = $dbh->isAdmin($_SESSION["username"]);
-if(count($login_result)!=0) {
-    $templateParams["tipoUtente"] = "Admin";
-}
-
 
 if(isset($_GET["tipo"])) {
     $result_prod = $dbh->getShoesByType($_GET["tipo"]);

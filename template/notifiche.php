@@ -4,8 +4,9 @@
 <?php 
 foreach ($templateParams["notifiche"] as $notifica) : 
 ?>
-    <tr>
-       <!-- <th> </th> -->
+    <tr class="notifica-<?php if ($notifica["visto"]=="no") {
+      echo "non-";
+    }?>vista">
       <td class="data-notifica">
         <?php echo $notifica["dataNotifica"];?>
       </td>
@@ -16,8 +17,7 @@ foreach ($templateParams["notifiche"] as $notifica) :
         <?php echo $notifica["descrizione"];?>
       </td>
     </tr>
-  <?php $dbh->updateSeen($notifica["codiceNotifica"],"si"); ?>
-<?php endforeach; ?> 
+<?php endforeach;?> 
   </tbody>
 </table>
 

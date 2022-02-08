@@ -21,7 +21,13 @@
             </svg>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             <?php if (isset($templateParams["notifiche"])) {
-              echo count($templateParams["notifiche"]);
+              $count=0;
+              foreach ($templateParams["notifiche"] as $notifica) : 
+                if ($notifica["visto"]=="no") {
+                  $count = $count + 1;
+                }
+              endforeach;
+              echo $count;
             }
             else {
               echo "0";

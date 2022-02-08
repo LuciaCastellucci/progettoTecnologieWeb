@@ -9,7 +9,7 @@ if (isset($_POST["indirizzo"]) && isset($_POST["città"]) && isset($_POST["cap"]
     }
     $timestamp = strtotime("now");
     $data = (string)date('d/m/Y H:i:s', $timestamp);
-    $result_order = $dbh->createOrder($data, $recapito, $_POST["indirizzo"], $_POST["città"], $_POST["cap"], $_SESSION["carrello"]);
+    $result_order = $dbh->createOrder($data, $recapito, $_POST["indirizzo"], $_POST["città"], $_POST["cap"], $_SESSION["carrello"], $_SESSION["utente"]);
     $result_notify = $dbh->createNotifications("Ordine ricevuto", "Hai ricevuto un nuovo ordine", "admin", $data, "no");
     if ($result_order!=false && $result_notify!=false) {
         $templateParams["titolo"] = "Grazie!";

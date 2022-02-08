@@ -28,3 +28,9 @@ div.container a.admin button.btn {
     color: #65499c;
     border-color: #65499c;
 }
+tr.notifica-non-vista {
+    background-color: #c7a4ff;
+}
+tr.notifica-vista {
+    background-color: white;
+}

@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+div.container-buttons button.btn {
+    background-color: white;
+    color: #65499c;
+    border-color: #65499c;
+}
+img.figure-img {
+    object-fit: contain;
+    max-width: 100%;
+}
+h2 {
+    text-align: center;
+    font-weight: bold;
+}
+strong {
+    font-weight: bold;
+}
