@@ -1,25 +1,23 @@
 <div class="container-fluid">
   <h2>Prodotti</h2>
-<section>
+  <div class="d-flex flex-wrap align-items-center justify-content-center bg-white position-relative">
+    <a href="shop.php">
+      <button class="btn btn-primary">
+        Tutti i prodotti
+      </button>
+    </a>
+    <a href="shop.php?tipo=Dunk">
+      <button class="btn btn-primary">
+        Dunk
+      </button>
+    </a>
+    <a href="shop.php?tipo=Jordan">
+      <button class="btn btn-primary mx-auto">
+        Jordan
+      </button>
+    <a>
+  </div>
   <hr>
-      <a href="shop.php">
-        <button class="btn btn-primary">
-          Tutti i prodotti
-          </button>
-        <a>
-      <a href="shop.php?tipo=Dunk">
-        <button class="btn btn-primary">
-          Dunk
-        </button>
-      </a>
-      <a href="shop.php?tipo=Jordan">
-        <button class="btn btn-primary mx-auto">
-          Jordan
-        </button>
-      <a>
-      <hr>
-</section>
-
       <div class="row">
         <?php foreach($templateParams["modelli"] as $modello):?>
           <div class="card mx-auto">
@@ -35,10 +33,10 @@
           <?php endif; ?>
         </div>
         <?php endforeach; ?> 
-            </div>
-<!--</div> -->
+      </div>
+      </div>
 
-
+<!--
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group me-2" role="group" aria-label="First group">
     <button type="button" class="btn btn-primary">1</button>
@@ -47,4 +45,5 @@
     <button type="button" class="btn btn-primary">4</button>
   </div>
 </div>
-            </div>
+-->
+            

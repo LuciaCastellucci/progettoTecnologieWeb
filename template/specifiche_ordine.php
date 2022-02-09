@@ -1,10 +1,17 @@
 <div class="container-buttons">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start bg-white position-relative"><a class="ordini" href="areaUtente.php">
+    <div class="d-flex flex-wrap align-items-center justify-content-center bg-white position-relative"><a class="ordini" href="areaUtente.php">
       <a class="ordini" href="areaUtente.php">
         <button type="button" class="btn btn-primary position-relative">
           I tuoi ordini
         </button>
       </a>
+    <?php if(isset($templateParams["tipoUtente"]) && $templateParams["tipoUtente"]=="Admin"):?>
+      <a class="dati" href="areaUtente.php?action=1">
+        <button type="button" class="btn btn-primary position-relative">
+        I tuoi prodotti
+        </button>
+      </a>
+    <?php endif; ?>
       <a class="dati" href="areaUtente.php?action=1">
         <button type="button" class="btn btn-primary position-relative">
         I tuoi dati
@@ -14,7 +21,12 @@
 </div>
 
 <div class="container">
-    <h5>Il tuo ordine</h5>
+    <h5><?php if(isset($templateParams["tipoUtente"]) && $templateParams["tipoUtente"]=="Admin") {
+        echo "Contenuto ordine";
+    } 
+    else {
+        echo "Il tuo ordine";
+    }?></h5>
     <h6>Articoli:</h6>
     <?php if (isset($templateParams["ordine"])):
         $totale = 0;
@@ -43,7 +55,12 @@
         </p>
     </div>
     <section>
-        <h5>I tuoi dati</h5><?php $var=$templateParams["ordine"][0];?>
+        <h5><?php if(isset($templateParams["tipoUtente"]) && $templateParams["tipoUtente"]=="Admin") {
+            echo "Dati spedizione cliente";
+        } 
+        else {
+            echo "I tuoi dati";
+        }?></h5><?php $var=$templateParams["ordine"][0];?>
         <p><strong>Nome: </strong><?php if (isset($var["recapito"]) && $var["recapito"]!="NULL") {
             echo $var["recapito"];
         }

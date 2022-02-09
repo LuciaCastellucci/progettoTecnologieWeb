@@ -1,7 +1,9 @@
 <?php
 require_once 'bootstrap.php';
 
-if(isset($_POST["username"]) && isset($_POST["password"])){
+
+
+if(isset($_POST["username"]) && isset($_POST["password"]) && $_POST["username"]!=NULL && $_POST["password"]!=NULL){
     $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
     if(count($login_result)==0){
         //Login fallito
@@ -16,7 +18,8 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
                 //se l'utente ha già un carrello associato da sessioni precedenti allora lo conservo
                 $result = $dbh->getUserCart($_POST["username"]);
                 if (count($result)!=0) {
-                    registerCart($result[0]);
+                    $carrelloUtente = $result[0];
+                    registerCart($carrelloUtente["codeCarrello"]);
                 }
                 //se l'utente non ha già un carrello allora lo creo e glielo associo
                 else {
@@ -50,24 +53,26 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
                 //se un utente nel suo account aveva già iniziato a fare acquisti, voglio che gli restino nel carrello
                 //per cui unisco al carrello precedente l'attuale carrello
                 if (count($result_cart1)!=0) {
+                    $carrelloUtente = $result_cart1[0];
                     //se il carrello in session non è vuoto
                     //allora prendo gli elementi nel carrello e li aggiungo al carrello precedente 
                     //ossia quello settato nel campo carrello della tabella utente
                     $result_shoes = $dbh->getShoesInCart($_SESSION["carrello"]);
+                    echo count($result_shoes);
                     if (count($result_shoes)!=0) {
                         //per ogni scarpa nel carrello in session
                         foreach ($result_shoes as $scarpa):
                             //controllo che non sia già presente nel carrello
-                            $result_shoes1 = $dbh->shoesInCart($result_cart1[0], $scarpa["codModello"], $scarpa["codTaglia"]);
+                            $result_shoes1 = $dbh->shoesInCart($carrelloUtente["codeCarrello"], $scarpa["codModello"], $scarpa["codTaglia"]);
                             if (count($result_shoes1)!=0) {
                                 $scarpa = $result_shoes1[0];
                                 $qta = $scarpa["qtaCarrello"];
                                 $qta = $qta + 1;
-                                $dbh->updateQuantityInCart($qta, $result_cart1[0], $scarpa["codModello"], $scarpa["codTaglia"]);
+                                $dbh->updateQuantityInCart($qta, $carrelloUtente["codeCarrello"], $scarpa["codModello"], $scarpa["codTaglia"]);
                             }
                             //se non è già presente nel carrello la scarpa, allora la inserisco ex novo
                             else {
-                                $id = $dbh->insertShoesInCart($result_cart1[0], $scarpa["codModello"], $scarpa["codTaglia"], 1);
+                                $id = $dbh->insertShoesInCart($carrelloUtente["codeCarrello"], $scarpa["codModello"], $scarpa["codTaglia"], 1);
                                 if($id!=false){
                                     $msg = "Inserimento completato correttamente!";
                                 }
@@ -87,7 +92,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
                     //cambio il carrello settato in session mettendo quello precedente
                     $dbh->deleteCart($_SESSION["carrello"]);
                     unsetVar("carrello");
-                    registerCart($result_cart1[0]);
+                    registerCart($carrelloUtente["codeCarrello"]);
                 }
                 //se un utente non aveva ancora un carrello gli associo il carrello della variabile sessione
                 else {
@@ -105,12 +110,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
     }
 }
 
-if (isset($_SESSION["carrello"]) && count($admin_result)==0) {
-    $result = $dbh->getShoesInCart($_SESSION["carrello"]);
-    if (count($result)!=0) {
-        $templateParams["scarpe"] = $result;
-    }
-}
+
 
 if (isset($_GET["action"]) && $_GET["action"]==1) {
     if(isUserLoggedIn()){
@@ -130,6 +130,13 @@ if (isset($_GET["action"]) && $_GET["action"]==1) {
 }
 else {
     if(isUserLoggedIn()){
+        $admin_result = $dbh->isAdmin($_SESSION["username"]);
+        if (isset($_SESSION["carrello"]) && count($admin_result)==0) {
+            $result = $dbh->getShoesInCart($_SESSION["carrello"]);
+            if (count($result)!=0) {
+                $templateParams["scarpe"] = $result;
+             }
+        }
         $result_not = $dbh->getNotifications($_SESSION["username"]);
         if (count($result_not)!=0) {
             $templateParams["notifiche"] = $result_not;

@@ -55,6 +55,11 @@ div.container-vuoto {
   align-items: center;
   text-align: center;
 }
+td.azione a button.btn {
+  background-color: green;
+  color: white;
+  border-color: white;
+}
 
 
  

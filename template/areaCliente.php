@@ -1,5 +1,5 @@
 <div class="container-buttons">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start bg-white position-relative"><a class="ordini" href="areaUtente.php">
+    <div class="d-flex flex-wrap align-items-center justify-content-center bg-white position-relative">
       <a class="ordini" href="areaUtente.php">
         <button type="button" class="btn btn-primary position-relative">
           I tuoi ordini
@@ -27,24 +27,38 @@
       <a href="areaUtente.php" class="btn btn-danger">Annulla</a>
   </form>
 <?php endif; 
-      else:
-?>
-<table class="table caption-top">
-  <caption>Ordini</caption>
-  <tbody>
-<?php 
-foreach ($templateParams["ordini"] as $ordine): 
-?>
+  else:
+  if (isset($templateParams["ordini"])):
+  ?>
+  <table class="table caption-top">
+    <caption>Ordini</caption>
+    <tbody>
+  <?php
+  foreach ($templateParams["ordini"] as $ordine): 
+  ?>
     <tr>
        <!-- <th> </th> -->
       <td class="numero">
-        <?php echo "Ordine #".$ordine["numOrdine"];?>
+        <?php echo "Ordine #".$ordine["numeroOrdine"];?>
       </td>
       <td class="data-ordine">
         <?php echo $ordine["dataOrdine"];?>
       </td>
+      <td class="stato-ordine">
+        <?php 
+        $statoOrdine="";
+        foreach ($templateParams["stati"] as $stati): 
+          if ($stati["numOrdine"] == $ordine["numeroOrdine"]) {
+            if ($statoOrdine=="") {
+              echo $stati["stato"];
+              $statoOrdine = $stati["stato"];
+            } 
+          }
+        endforeach; 
+          ?>
+      </td>
       <td class="vedi-ordine">
-        <a href="ordine.php?id=<?php echo $ordine["numOrdine"]?>">
+        <a href="ordine.php?id=<?php echo $ordine["numeroOrdine"]?>">
             <button type="button" class="btn btn-primary position-relative">
               Vedi dettagli ordine
             </button>
@@ -53,6 +67,16 @@ foreach ($templateParams["ordini"] as $ordine):
     </tr>
 <?php endforeach; 
 endif; 
+if (!isset($templateParams["ordini"])):
+?>
+<div class="container-vuoto">
+    <h2> Non hai ancora fatto nessun'ordine... </h2>
+    <h3> Ma sei ancora in tempo per rimediare! </h3>
+    <a href="shop.php" class="btn btn-primary btn-lg">Vai allo shop</a>
+</div>
+<?php
+endif;
+endif;
 ?>
   </tbody>
 </table>

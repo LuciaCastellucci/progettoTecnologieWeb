@@ -1,35 +1,108 @@
-  <div class="b-example-divider"></div>
-  <div class="d-flex flex-column flex-shrink-0 p-3 m-4" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <span class="fs-4">Area Fornitore</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="index.php" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-          Gestione ordini
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark ">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Gestione Prodotti
-        </a>
-      </li>
-      </li>
-
-      <!--
-      <li>
-        <a href="notifica.php" class="nav-link link-dark"> 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-            </svg>
-          Invia notifica all'utente
-        </a>
-      </li>
-      -->
-
-    </ul>
-    <hr>
+<div class="container-buttons">
+    <div class="d-flex flex-wrap align-items-center justify-content-center bg-white position-relative">
+      <a class="ordini" href="areaUtente.php">
+        <button type="button" class="btn btn-primary position-relative">
+          I tuoi ordini
+        </button>
+      </a>
+      <a class="dati" href="areaUtente.php?action=1">
+        <button type="button" class="btn btn-primary position-relative">
+        I tuoi prodotti
+        </button>
+      </a>
+      <a class="dati" href="areaUtente.php?action=1">
+        <button type="button" class="btn btn-primary position-relative">
+        I tuoi dati
+        </button>
+      </a>
   </div>
+</div>
+
+<?php
+    if(isset($templateParams["action"])): 
+      if($templateParams["action"]==1):
+      $utente = $templateParams["utente"]; 
+?>
+<form action="areaUtente.php?action=1" method="POST" enctype="multipart/form-data">
+  <h2>Modifica i tuoi dati</h2>
+      <label for="username">Username: </label><?php echo " ".$utente["username"];?><br>
+      <label for="nome">Nome: </label><input type="text" id="nome" name="nome" value="<?php echo $utente["nome"]; ?>"/><br>
+      <label for="password">Password:</label><input type="text" id="password" name="password" value="<?php echo $utente["pw"]; ?>"/><br>
+      
+      <input type="submit" name="submit" value="Modifica i tuoi dati" class="btn btn-primary"/>
+      <a href="areaUtente.php" class="btn btn-danger">Annulla</a>
+  </form>
+<?php endif; 
+  else:
+  if (isset($templateParams["ordini"])):
+  ?>
+  <table class="table caption-top">
+    <caption>Ordini</caption>
+    <tbody>
+  <?php
+  foreach ($templateParams["ordini"] as $ordine): 
+  ?>
+    <tr>
+       <!-- <th> </th> -->
+      <td class="numero">
+        <?php echo "Ordine #".$ordine["numeroOrdine"];?>
+      </td>
+      <td class="data-ordine">
+        <?php echo $ordine["dataOrdine"];?>
+      </td>
+      <td class="stato-ordine">
+        <?php 
+        $statoOrdine="";
+        foreach ($templateParams["stati"] as $stati): 
+          if ($stati["numOrdine"] == $ordine["numeroOrdine"]) {
+              if ($statoOrdine=="") {
+                echo $stati["stato"];
+                $statoOrdine = $stati["stato"];
+              } 
+          }
+        endforeach; 
+          ?>
+      </td>
+      <?php if($statoOrdine!="Spedito"): ?>
+      <td class="azione">
+        <a href="processa_ordine.php?action=<?php if ($statoOrdine=="Ordinato") {
+                echo 1;
+            }
+            if ($statoOrdine=="In preparazione") {
+                echo 2;
+            }?>&&id=<?php echo $ordine["numeroOrdine"]; ?>">
+            <button type="button" class="btn btn-primary position-relative">
+            <?php if ($statoOrdine=="Ordinato") {
+                echo "Conferma ordine";
+            }
+            if ($statoOrdine=="In preparazione") {
+                echo "Conferma partenza spedizione";
+            }
+            ?>
+            </button>
+        </a>
+      </td>
+      <?php endif; ?>
+      <td class="vedi-ordine">
+        <a href="ordine.php?id=<?php echo $ordine["numeroOrdine"]?>">
+            <button type="button" class="btn btn-primary position-relative">
+            Vedi dettagli ordine
+            </button>
+        </a>
+      </td>
+    </tr>
+<?php endforeach; 
+endif; 
+if (!isset($templateParams["ordini"])):
+?>
+<div class="container-vuoto">
+    <h2> Non hai ancora fatto nessun'ordine... </h2>
+    <h3> Ma sei ancora in tempo per rimediare! </h3>
+    <a href="shop.php" class="btn btn-primary btn-lg">Vai allo shop</a>
+</div>
+<?php
+endif;
+endif;
+?>
+  </tbody>
+</table>

@@ -28,8 +28,17 @@ class DatabaseHelper{
     }
 
     public function getProducts(){
-        $stmt = $this->db->prepare("SELECT * FROM modello");
+        $stmt = $this->db->prepare("SELECT DISTINCT codiceModello, immagine, descrizione, altezza, tipo, prezzo FROM modello, scarpa WHERE codModello=codiceModello");
         $stmt->execute(); 
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getShoesByType($idType){
+        $stmt = $this->db->prepare("SELECT DISTINCT codiceModello, immagine, descrizione, altezza, tipo, prezzo FROM modello, scarpa WHERE tipo=? AND codModello=codiceModello");
+        $stmt->bind_param('s',$idType);
+        $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -125,7 +134,7 @@ class DatabaseHelper{
     }
 
     public function lastCartCode(){
-        $stmt = $this->db->prepare("SELECT MAX(codiceCarrello) FROM carrello");
+        $stmt = $this->db->prepare("SELECT MAX(codiceCarrello) as massimo FROM carrello");
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -184,8 +193,10 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getOrders(){
-        $stmt = $this->db->prepare("SELECT * FROM ordine");
+
+    public function getOrderByCart($idCarrello){
+        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE codiCarrello=?");
+        $stmt->bind_param('i',$idCarrello);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -193,8 +204,33 @@ class DatabaseHelper{
     }
 
     public function getOrdersByUser($idCliente){
-        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE codiCliente=?");
+        $stmt = $this->db->prepare("SELECT * FROM ordine WHERE codiCliente=? ORDER BY numeroOrdine DESC");
         $stmt->bind_param('s',$idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getOrderStatusByUser($idCliente){
+        $stmt = $this->db->prepare("SELECT numOrdine, dataStato, stato FROM ordine, stato_ordine WHERE codiCliente=? AND numOrdine=numeroOrdine ORDER BY numeroOrdine, dataStato DESC");
+        $stmt->bind_param('s',$idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getOrders(){
+        $stmt = $this->db->prepare("SELECT * FROM ordine ORDER BY numeroOrdine DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getOrderStatus(){
+        $stmt = $this->db->prepare("SELECT numOrdine, dataStato, stato FROM ordine, stato_ordine WHERE numOrdine=numeroOrdine ORDER BY numeroOrdine, dataStato DESC");
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -211,7 +247,7 @@ class DatabaseHelper{
     }
 
     public function getShoesInOrderByOrder($idOrdine){
-        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, modello, ordine WHERE numOrdine=? AND codiceModello=codModello AND codiCarrello=codCarrello");
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, modello, ordine WHERE numeroOrdine=? AND codiceModello=codModello AND codiCarrello=codCarrello");
         $stmt->bind_param('i',$idOrdine);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -252,15 +288,6 @@ class DatabaseHelper{
         return $stmt->execute();
     }
     
-    public function getShoesByType($idType){
-        $stmt = $this->db->prepare("SELECT * FROM modello WHERE tipo=?");
-        $stmt->bind_param('s',$idType);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
     public function getNotifications($idUser){
         $stmt = $this->db->prepare("SELECT * FROM notifiche WHERE usernameUtente=? ORDER BY codiceNotifica DESC");
         $stmt->bind_param('s',$idUser);
@@ -280,7 +307,7 @@ class DatabaseHelper{
     }
 
     public function createNotifications($titolo, $descrizione, $idUtente, $data, $visto){
-        $query = "INSERT INTO notifiche (titolo, descrizione, usernameUtente, dataNotifica) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO notifiche (titolo, descrizione, usernameUtente, dataNotifica, visto) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("sssss", $titolo, $descrizione, $idUtente, $data, $visto);
         $stmt->execute();
@@ -302,6 +329,24 @@ class DatabaseHelper{
         $stmt->bind_param('sss', $nome, $password, $user);
         
         return $stmt->execute();
+    }
+
+    public function updateStatus($idOrdine, $stato, $data){
+        $query = "INSERT INTO stato_ordine (numOrdine, stato, dataStato) VALUES (?,?,?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("isi", $idOrdine, $stato, $data);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
+
+    public function getUserByOrder($idOrder){
+        $stmt = $this->db->prepare("SELECT * FROM ordine, utente WHERE codiCliente=username AND numeroOrdine=?");
+        $stmt->bind_param('i',$idOrder);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
 }

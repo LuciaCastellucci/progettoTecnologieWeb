@@ -28,7 +28,7 @@
         echo "?action=1";
         }
         ?>"> 
-        <button type="button" class="w-100 btn btn-primary">
+        <button type="button" class="w-100 btn btn-primary" onClick=>
       Registrati
     </button>
         </a>
