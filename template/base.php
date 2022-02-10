@@ -11,9 +11,15 @@
     <!--  -->
     <title><?php echo $templateParams["titolo"]; ?></title>
 
-    <?php if(isset($templateParams["js"])): ?>
-    <link href=<?php echo $templateParams["js"]; ?> rel="stylesheet" type="text/javascript"/>
-    <?php endif; ?>
+    <?php
+    if(isset($templateParams["js"])):
+        foreach($templateParams["js"] as $script):
+    ?>
+        <script src="<?php echo $script; ?>"></script>
+    <?php
+        endforeach;
+    endif;
+    ?>
 
     <link href=<?php echo $templateParams["css"]; ?> rel="stylesheet" type="text/css"/>
     <link href="./css/base.css" rel="stylesheet" type="text/css"/>

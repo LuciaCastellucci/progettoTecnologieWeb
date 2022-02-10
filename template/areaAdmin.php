@@ -5,12 +5,12 @@
           I tuoi ordini
         </button>
       </a>
-      <a class="dati" href="areaUtente.php?action=1">
+      <a class="prodotti" href="areaUtente.php?page=2">
         <button type="button" class="btn btn-primary position-relative">
         I tuoi prodotti
         </button>
       </a>
-      <a class="dati" href="areaUtente.php?action=1">
+      <a class="dati" href="areaUtente.php?page=1">
         <button type="button" class="btn btn-primary position-relative">
         I tuoi dati
         </button>
@@ -19,11 +19,11 @@
 </div>
 
 <?php
-    if(isset($templateParams["action"])): 
-      if($templateParams["action"]==1):
+    if(isset($templateParams["page"])): 
+      if($templateParams["page"]==1):
       $utente = $templateParams["utente"]; 
 ?>
-<form action="areaUtente.php?action=1" method="POST" enctype="multipart/form-data">
+<form action="areaUtente.php?page=1" method="POST" enctype="multipart/form-data">
   <h2>Modifica i tuoi dati</h2>
       <label for="username">Username: </label><?php echo " ".$utente["username"];?><br>
       <label for="nome">Nome: </label><input type="text" id="nome" name="nome" value="<?php echo $utente["nome"]; ?>"/><br>
@@ -65,7 +65,7 @@
       </td>
       <?php if($statoOrdine!="Spedito"): ?>
       <td class="azione">
-        <a href="processa_ordine.php?action=<?php if ($statoOrdine=="Ordinato") {
+        <a href="processa_prodotto.php?action=<?php if ($statoOrdine=="Ordinato") {
                 echo 1;
             }
             if ($statoOrdine=="In preparazione") {

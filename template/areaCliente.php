@@ -5,7 +5,7 @@
           I tuoi ordini
         </button>
       </a>
-      <a class="dati" href="areaUtente.php?action=1">
+      <a class="dati" href="areaUtente.php?page=1">
         <button type="button" class="btn btn-primary position-relative">
         I tuoi dati
         </button>
@@ -13,11 +13,11 @@
   </div>
 </div>
 
-<?php if(isset($templateParams["action"])): 
-      if($templateParams["action"]==1):
+<?php if(isset($templateParams["page"])): 
+      if($templateParams["page"]==1):
       $utente = $templateParams["utente"]; 
 ?>
-<form action="areaUtente.php?action=1" method="POST" enctype="multipart/form-data">
+<form action="areaUtente.php?page=1" method="POST" enctype="multipart/form-data">
   <h2>Modifica i tuoi dati</h2>
       <label for="username">Username: </label><?php echo " ".$utente["username"];?><br>
       <label for="nome">Nome: </label><input type="text" id="nome" name="nome" value="<?php echo $utente["nome"]; ?>"/><br>

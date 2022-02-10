@@ -19,12 +19,12 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function countProducts(){
+    public function getModels(){
         $stmt = $this->db->prepare("SELECT * FROM modello");
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return count($result->fetch_all(MYSQLI_ASSOC));
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getProducts(){
@@ -107,6 +107,23 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getSizesModelById($id){
+        $stmt = $this->db->prepare("SELECT codTaglia, codModello, qtaMagazzino FROM scarpa WHERE codModello = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getSizes(){
+        $stmt = $this->db->prepare("SELECT * FROM taglia");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getCarts(){
         $stmt = $this->db->prepare("SELECT * FROM carrello");
         $stmt->execute();
@@ -141,6 +158,14 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function lastModelCode(){
+        $stmt = $this->db->prepare("SELECT MAX(codiceModello) as massimo FROM modello");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function createCart($idCarrello){
         $query = "INSERT INTO carrello (codiceCarrello) VALUES (?)";
         $stmt = $this->db->prepare($query);
@@ -154,6 +179,24 @@ class DatabaseHelper{
         $query = "INSERT INTO scarpe_carrello (codCarrello, codModello, codTaglia, qtaCarrello) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("iiii", $idCarrello, $idModello, $idTaglia, $qta);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
+
+    public function insertModels($idModello, $idTipo, $idAltezza, $descrizione, $immagine, $prezzo){
+        $query = "INSERT INTO modello (codiceModello, tipo, altezza, descrizione, immagine, prezzo) VALUES (?, ?, ?, ?, ? ,?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("issssi", $idModello, $idTipo, $idAltezza, $descrizione, $immagine, $prezzo);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
+
+    public function insertShoes($idModello, $idTaglia, $qta){
+        $query = "INSERT INTO scarpa (codModello, codTaglia, qtaMagazzino) VALUES (?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iii", $idModello, $idTaglia, $qta);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -276,6 +319,22 @@ class DatabaseHelper{
         $query = "DELETE FROM carrello WHERE codiceCarrello = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$idCarrello);
+        $stmt->execute();
+        return true;
+    }
+
+    public function deleteShoes($idModello){
+        $query = "DELETE FROM modello WHERE codiceModello = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i',$idModello);
+        $stmt->execute();
+        return true;
+    }
+
+    public function deleteSize($idModello, $idTaglia){
+        $query = "DELETE FROM scarpe WHERE codModello = ? AND codTaglia=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ii', $idModello, $idTaglia);
         $stmt->execute();
         return true;
     }

@@ -15,8 +15,8 @@ if (isUserLoggedIn()) {
     }
 }
 
-if(isset($_GET["action"]) && $_GET["action"]==1) {
-    $templateParams["action"] = 1;
+if(isset($_GET["page"]) && $_GET["page"]==1) {
+    $templateParams["page"] = 1;
     if (isset($_POST["nome"]) && isset($_POST["password"]) && $_POST["nome"]!=NULL && $_POST["password"]!=NULL) {
         $result_user = $dbh->updateUser($_POST["nome"], $_POST["password"], $_SESSION["username"]);
         if ($result_user!=false) {
@@ -46,7 +46,6 @@ if(count($login_result)==0){
 }
 else{
     $templateParams["titolo"] = "Admin";
-    $templateParams["nome"] = "template/areaAdmin.php";
     $templateParams["css"] = "css/areaAdmin.css";
     $templateParams["tipoUtente"] = "Admin";
     $result_us = $dbh->getUser($_SESSION["username"]);
@@ -56,6 +55,18 @@ else{
     if (count($result_orders_admin)!=0 && count($result_status_admin)!=0) {
         $templateParams["ordini"] = $result_orders_admin;
         $templateParams["stati"] = $result_status_admin;
+    }
+    if(isset($_GET["page"]) && $_GET["page"]==2) {
+        $result_s = $dbh->getModels();
+        $result_t = $dbh->getShoes();
+        if (count($result_s)!=0) {
+            $templateParams["scarpe"] = $result_s;
+            $templateParams["taglie"] = $result_t;
+            $templateParams["nome"] = "template/admin-scarpe.php";
+        } 
+    }
+    else {
+        $templateParams["nome"] = "template/areaAdmin.php";
     }
 }
 

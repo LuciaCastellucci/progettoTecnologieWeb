@@ -44,6 +44,22 @@ input.btn {
   color: white;
   border-color: white;
 }
+table {
+  font-size: 0.75em;
+}
+tr {
+  align-items: center;
+  width: 100%;
+}
+td.prezzo-scarpa {
+  padding-left: 0%;
+  padding-right: 0%;
+  width: 12%;
+}
+td.immagine {
+  padding: 0%;
+  width: 20%;
+}
 td {
   font-size: 1.1em;
   margin-top: 2%;
@@ -60,6 +76,10 @@ td.azione a button.btn {
   color: white;
   border-color: white;
 }
-
+img {
+  object-fit: contain;
+  max-width: 90%;
+  max-height: 90%;
+}
 
  
