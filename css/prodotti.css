@@ -51,10 +51,11 @@ div.card {
     background-color: #c7a4ff;
     margin: 20px 150px;
     border-color: #9575cd;
-    max-width: 50%;
-    max-height: 10%;
+    width: 50%;
+    height: 5%;
     text-align: center;
     border-width: 5px;
+    max-width: 300px;
 }
 section {
     margin-left: 20%;

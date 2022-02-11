@@ -7,6 +7,11 @@ a.btn {
     color: white;
     border-color: white;
 }
+div.carousel {
+    height: 20%;
+    max-height: 500px;
+
+}
 a.btn:hover, a.btn:active, a.btn:link, a.btn:focus {
     background-color: white;
     color: #65499c;
@@ -32,10 +37,6 @@ div.card {
 p.card-text {
     width: 100%;
     max-height: 40%;
-}
-div.carousel-caption {
-    padding: 1px;
-    background-color: #9575cd;
 }
 div.card img.card-img-top {
     position: relative;

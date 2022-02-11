@@ -9,8 +9,9 @@ div.card {
     border: 0px;
 }
 img.card-img-top {
-    margin-left: 22%;
-    max-width: 50%;
+    margin-left: 28%;
+    margin-right: 0%;
+    max-width: 40%;
     max-height: 40%;
 }
 h2 {
