@@ -34,3 +34,7 @@ tr.notifica-non-vista {
 tr.notifica-vista {
     background-color: white;
 }
+div.container-notifiche {
+    height: 70%;
+
+}

@@ -44,6 +44,15 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getShoesInUsersCart($idModello, $idTaglia){
+        $stmt = $this->db->prepare("SELECT * FROM scarpe_carrello, utente WHERE codeCarrello = codCarrello AND codModello = ? AND codTaglia= ?");
+        $stmt->bind_param('ii',$idModello, $idTaglia);
+        $stmt->execute(); 
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getShoes(){
         $stmt = $this->db->prepare("SELECT * FROM scarpa");
         $stmt->execute(); 
@@ -99,7 +108,7 @@ class DatabaseHelper{
     }
 
     public function getSizesById($id){
-        $stmt = $this->db->prepare("SELECT codTaglia FROM scarpa WHERE codModello = ?");
+        $stmt = $this->db->prepare("SELECT codTaglia FROM scarpa WHERE codModello = ? AND qtaMagazzino != 0");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -200,6 +209,23 @@ class DatabaseHelper{
         $stmt->execute();
         
         return $stmt->insert_id;
+    }
+
+    public function updateModels($idTipo, $idAltezza, $descrizione, $prezzo, $idModello){
+        $query = "UPDATE modello SET tipo = ?, altezza = ?, descrizione = ?, prezzo = ? WHERE codiceModello = ? ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sssii", $idTipo, $idAltezza, $descrizione, $prezzo, $idModello);
+        $stmt->execute();
+        
+        return $stmt->insert_id;
+    }
+
+    public function updateShoes($qta, $idModello, $idTaglia){
+        $query = "UPDATE scarpa SET qtaMagazzino = ? WHERE codModello = ? AND codTaglia = ? ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("iii", $qta, $idModello, $idTaglia);
+        
+        return $stmt->execute();
     }
 
     public function updateCart($idCarrello, $idUtente){
@@ -308,7 +334,7 @@ class DatabaseHelper{
     }
 
     public function deleteShoesFromCart($idCarrello, $idModello, $idTaglia){
-        $query = "DELETE FROM scarpe_carrello WHERE codCarrello = ? AND codModello = ? AND codTaglia=?";
+        $query = "DELETE FROM scarpe_carrello WHERE codCarrello = ? AND codModello = ? AND codTaglia = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('iii',$idCarrello, $idModello, $idTaglia);
         $stmt->execute();

@@ -13,11 +13,10 @@
 
     <?php
     if(isset($templateParams["js"])):
-        foreach($templateParams["js"] as $script):
+      $script = $templateParams["js"];
     ?>
         <script src="<?php echo $script; ?>"></script>
     <?php
-        endforeach;
     endif;
     ?>
 

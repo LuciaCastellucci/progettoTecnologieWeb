@@ -43,7 +43,6 @@
   foreach ($templateParams["ordini"] as $ordine): 
   ?>
     <tr>
-       <!-- <th> </th> -->
       <td class="numero">
         <?php echo "Ordine #".$ordine["numeroOrdine"];?>
       </td>
@@ -65,7 +64,7 @@
       </td>
       <?php if($statoOrdine!="Spedito"): ?>
       <td class="azione">
-        <a href="processa_prodotto.php?action=<?php if ($statoOrdine=="Ordinato") {
+        <a href="processa_ordine.php?action=<?php if ($statoOrdine=="Ordinato") {
                 echo 1;
             }
             if ($statoOrdine=="In preparazione") {
@@ -86,7 +85,7 @@
       <td class="vedi-ordine">
         <a href="ordine.php?id=<?php echo $ordine["numeroOrdine"]?>">
             <button type="button" class="btn btn-primary position-relative">
-            Vedi dettagli ordine
+            Vedi ordine
             </button>
         </a>
       </td>

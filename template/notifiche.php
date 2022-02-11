@@ -1,4 +1,5 @@
-<table class="table caption-top">
+<div class="container-notifiche">
+  <table class="table caption-top">
   <caption>Notifiche</caption>
   <tbody>
 <?php 
@@ -20,6 +21,7 @@ foreach ($templateParams["notifiche"] as $notifica) :
 <?php endforeach;?> 
   </tbody>
 </table>
+</div>
 
 <div class="container">
   <a class="admin" href="areaUtente.php">
