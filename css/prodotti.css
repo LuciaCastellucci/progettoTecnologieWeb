@@ -39,7 +39,7 @@ button.btn {
     color: white;
     border-color: white;
 }
-button.btn:hover, button.btn:active, button.btn:link, button.btn:focus {
+button.btn:hover, button.btn:active, button.btn:focus {
     background-color: white;
     color: #65499c;
     border-color: #65499c;

@@ -24,15 +24,15 @@ if (isset($_GET["action"]) && $_GET["action"]==3) {
         $idModello = implode(",",$res[0]);
         $idModello = $idModello + 1;
         $id = $dbh->insertModels($idModello, $tipo, $altezza, $descrizione, $img, $prezzo);
-            foreach($taglie_inserite as $taglia):
-                $ris = $dbh->insertShoes($idModello, $taglia["codTaglia"], $taglia["qtaMagazzino"]);
-            endforeach;
-            if($ris!=false){
-                $msg = "Inserimento completato correttamente!";
-            }
-            else{
-                $msg = "Errore in inserimento!";
-            }
+        foreach($taglie_inserite as $taglia):
+            $ris = $dbh->insertShoes($idModello, $taglia["codTaglia"], $taglia["qtaMagazzino"]);
+        endforeach;
+        if($ris!=false && $id!=false){
+            $msg = "Inserimento completato correttamente!";
+        }
+        else{
+            $msg = "Errore in inserimento!";
+        }
         
     }
 } 

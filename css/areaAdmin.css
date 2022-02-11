@@ -19,7 +19,11 @@ div.container-buttons button.btn {
 caption {
   text-align: center;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.5em;
+}
+td.inserisci a.btn {
+  padding: 2.5%;
+  font-size: 0.95em;
 }
 form {
   font-size: 1em;
@@ -80,6 +84,10 @@ img {
   object-fit: contain;
   max-width: 90%;
   max-height: 90%;
+}
+form > img {
+  width: 50%;
+  margin-bottom: 2%;
 }
 
  
